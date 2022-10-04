@@ -1,24 +1,21 @@
-# README
+# Bottle Mail
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+不妊治療を行っている人同士が気軽に交流が持てるコミュニティサイト
 
-Things you may want to cover:
+### テーマを選んだ理由
+不妊治療を行うクリニックで勤務していた際、デリケートな治療内容であることから、身近な人には話せないという患者様が多くいらっしゃいました。悩みや不安を誰かと話したい、共感してほしいという気持ちをこのアプリを通じて解消ほしいという想いでアプリを作成しました。
 
-* Ruby version
+### ターゲットユーザ
+不妊治療をおこなっている方
 
-* System dependencies
+### 主な利用シーン
+相談や愚痴を誰かに聞いて欲しいとき。同じ悩みを持った友達が欲しい時。
 
-* Configuration
+## 設計書
 
-* Database creation
+## 開発環境
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
