@@ -1,0 +1,11 @@
+<h1>logo</h1>
+<% if member_signed_in? %>
+  <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
+  <%= link_to "マイページ", member_path(current_member.id) %>
+  <%= link_to "コミュニティへ", categories_path %>
+  <%= link_to "新規投稿", new_post_path %>
+<% else %>
+  <%= link_to "ログイン", new_member_session_path %>
+  <%= link_to "新規登録", new_member_registration_path %>
+  <%= link_to "アプリについて", homes_about_path %>
+<% end %>

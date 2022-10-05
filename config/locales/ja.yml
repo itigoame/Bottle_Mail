@@ -1,0 +1,6 @@
+ja:
+  enums:
+    member:
+      gender:
+        women: "女性"
+        men:   "男性"
