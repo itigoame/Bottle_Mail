@@ -1,2 +1,17 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<div class="container">
+  <%= flash[:edit_alret] %>
+  <h3>ジャンル編集: <%= @genre.name %>(カテゴリー: <%= @category.name %>)</h3>
+  <%= form_with model: @genre, url: admin_category_genre_path(@genre.id) do |f| %>
+    <div class="row">
+      <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <%= f.label :name, "名前" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="col-md-3 text-center text-md-left mt-3 mt-md-0">
+        <%= f.submit "編集", class: 'btn btn-block btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

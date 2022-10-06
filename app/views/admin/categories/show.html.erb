@@ -1,0 +1,24 @@
+<h3><%= @category.name %></h3>
+
+  <%= flash[:create_alret] %>
+
+  <%= form_with model: [:admin, @category, @genre] do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "追加" %>
+  <% end %>
+
+  <% @genres.each do |genre| %>
+  <table>
+    <tr>
+      <td>
+      <%= genre.name %>
+      </td>
+      <td>
+        <%= link_to "編集", edit_admin_category_genre_path(@category,genre.id) %>
+      </td>
+      <td>
+        <%= link_to "削除", admin_category_genre_path(@category,genre.id), method: :delete, data: {confirm: "ジャンルを削除するとジャンルに登録されている投稿全てが削除されます。本当に削除しますか？"} %>
+      </td>
+    </tr>
+  </table>
+<% end %>
