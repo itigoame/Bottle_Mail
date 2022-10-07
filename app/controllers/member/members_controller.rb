@@ -1,6 +1,6 @@
 class Member::MembersController < ApplicationController
   def show
-    @cu = Member.find(params[:id])
+    @member = Member.find(params[:id])
   end
 
   def edit
@@ -12,6 +12,6 @@ class Member::MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name)
+    params.require(:member).permit(:name, :profile_image, :self_introduction, :is_active)
   end
 end

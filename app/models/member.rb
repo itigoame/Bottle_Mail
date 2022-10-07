@@ -4,9 +4,18 @@ class Member < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one_attached :image
+  has_one_attached :profile_image
 
-  enum gender: { men: 1, women: 0, }
+  def get_profile_image
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/logo.png')
+      profile_image.attach(io: File.open(file_path),filename: 'default-image.png', content_type: 'image/png')
+    else
+      profile_image.variant(resize_to_limit[width,height]).processed
+    end
+  end
+
+  enum gender: { men: 1, women: 2, }
 
   validates :name, :self_introduction, presence: true
 

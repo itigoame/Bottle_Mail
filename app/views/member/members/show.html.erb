@@ -1,2 +1,26 @@
-<h1>Member::Members#show</h1>
-<p>Find me in app/views/member/members/show.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    フォロー数
+    フォロワー数
+    投稿数
+  </div>
+  <div class="ml-auto col-md-2 ">
+    <%= link_to "プロフィール編集",edit_admin_member_path(@member.id) %>
+    フォロー
+    メッセージ一覧
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%#= image_tag @member.get_profile_image(100, 100) %>
+      <% if @member.profile_image.present? %>
+        <%= image_tag @member.profile_image,size: "100x100" %>
+      <% else %>
+        <%= image_tag "no_image.png",size: "100x100" %>
+      <% end %>
+    </div>
+      <div class="col"><%= @member.name %></div>
+      <div class="col"><%= @member.self_introduction %></div>
+  </div>
+</div>
