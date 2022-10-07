@@ -1,5 +1,7 @@
 <h3>カテゴリー一覧</h3>
 
+<%= flash[:creat_alret] %>
+
 <%= form_with model: @category, url: admin_categories_path do |f| %>
   <%= f.text_field :name %>
   <%= f.submit "追加" %>
@@ -15,10 +17,10 @@
         <%= link_to "編集", edit_admin_category_path(category.id) %>
       </td>
       <td>
-        <%= link_to "削除", admin_category_path(category.id),method: :delete %>
+        <%= link_to "削除", admin_category_path(category.id),method: :delete, data: {confirm: "カテゴリーを削除するとカテゴリーに登録されているジャンル、投稿全てが削除されます。本当に削除しますか？"} %>
       </td>
       <td>
-        <%#= link_to "ジャンル追加", %>
+        <%= link_to "ジャンル追加", admin_category_path(category.id) %>
       </td>
     </tr>
   </table>

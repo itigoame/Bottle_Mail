@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_014833) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "member_id", null: false
-    t.integer "genre_id", null: false
+    t.integer "genre_id"
     t.string "title", null: false
     t.string "body", null: false
     t.boolean "is_closed", default: false, null: false

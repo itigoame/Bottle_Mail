@@ -6,6 +6,10 @@ class Member < ApplicationRecord
 
   has_one_attached :image
 
+  enum gender: { men: 1, women: 0, }
+
+  validates :name, :self_introduction, presence: true
+
   has_many :comments, dependent: :destroy
   has_many :empathys, dependent: :destroy
   has_many :posts,    dependent: :destroy
@@ -19,8 +23,4 @@ class Member < ApplicationRecord
   has_many :followings, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy
   has_many :following_members, through: :followings, source: :follower #自分がフォローされてる人一覧
 
-
-
-  enum gender: { women: 0, men: 1 }
-  validates :name, :email, :gender, :password, presence: true
 end

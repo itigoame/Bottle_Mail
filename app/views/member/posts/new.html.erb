@@ -1,2 +1,27 @@
-<h1>Member::Post#new</h1>
-<p>Find me in app/views/member/post/new.html.erb</p>
+<div class="cantainer">
+  <%= form_with model: @post do |f| %>
+    <div class="row">
+      <div class="col-md-3 my-3 text-right">タイトル</div>
+      <div class="col-md-4 my-3"><%= f.text_field :title %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 my-3 text-right">本文</div>
+      <div class="col-md-4 my-3"><%= f.text_area :body %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 my-3 text-right">カテゴリー選択</div>
+      <div class="col-md-4 my-3"><%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 my-3 text-right">ジャンル選択</div>
+      <div class="col-md-4 my-3">
+        <%# @genres.each do |genre| %>
+          <%# template{id: "genre#{category.id}"} %>
+          <%#=f.collection_select :genre_id, @categories.genres, :id, :name, include_blank: "選択してください" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 text-right"><%= f.submit "投稿" %></div>
+    </div>
+  <% end %>
+</div>
