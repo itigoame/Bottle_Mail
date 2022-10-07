@@ -6,7 +6,7 @@ class Member < ApplicationRecord
 
   has_one_attached :image
 
-  enum gender: { women: 0, men: 1 }
+  enum gender: { men: 1, women: 0, }
 
   validates :name, :self_introduction, presence: true
 
