@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :members,       only: [:show, :edit,   :update]
-    resources :rooms,         only: [:show, :index]
-    resources :categories,    only: [:create, :show, :index, :edit, :update, :destroy] do
+    resources :members,       only: [:show,   :edit, :index, :update]
+    resources :rooms,         only: [:show,   :index]
+    resources :categories,    only: [:create, :index, :edit, :update, :destroy, :show] do
       resources :genres,      only: [:create, :index, :edit, :update, :destroy]
     end
     resources :posts,         only: [:show, :index,  :destroy]
@@ -22,9 +22,8 @@ Rails.application.routes.draw do
 
   scope module: :member do
     resources :members,       only: [:show,   :edit, :update]
-    get 'members/unsubscribe'
-    get 'members/withdrawal'
-    resources :relationships, only: [:create, :index, :destroy]
+    resource  :relationships, only: [:create, :destroy]
+    get       :follows, :followers
     resources :rooms,         only: [:create, :show,  :index] do
     resources :chats,         only: [:create, :destroy]
     resources :entries,       only: [:create]
@@ -35,7 +34,9 @@ Rails.application.routes.draw do
     end
     resources :categories,    only:   [:index]
     root to: 'homes#top'
-    get      'homes/about'
+    get      'home/about'      => 'homes#about'
+    get      ':id/unsubscribe' => 'members#unsubscribe', as: 'unsubscribe'
+    patch    ':id/withdrawal'  => 'members#withdrawal',  as: 'withdrawal'
 
   end
 

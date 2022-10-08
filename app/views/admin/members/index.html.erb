@@ -1,0 +1,22 @@
+<div class="container">
+  <h3 class ="my-5">会員一覧</h3>
+  <% @members.each do |member| %>
+    <% if member.is_active == false %>
+
+      <div class="row">
+        <div class="col-md-3"><%= link_to member.name,admin_member_path(member.id),class: "text-black-50" %></div>
+        <div class="col-md-2 text-black-50"><%= member.gender %></div>
+        <div class="col-md-2 text-black-50"><%= member.status_display %></div>
+      </div>
+
+    <% else %>
+
+      <div class="row">
+        <div class="col-md-3"><%= link_to member.name,admin_member_path(member.id),class: "text-body" %></div>
+        <div class="col-md-2"><%= member.gender_i18n %></div>
+        <div class="col-md-2"><%= member.status_display %></div>
+      </div>
+
+    <% end %>
+  <% end %>
+</div>
