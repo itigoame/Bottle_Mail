@@ -4,7 +4,7 @@ class Admin::CategoriesController < ApplicationController
     category = Category.new(category_params)
 
     if category.save
-      redirect_to request.referer
+      redirect_back(fallback_location: root_url)
     else
       flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
       @category   = Category.new

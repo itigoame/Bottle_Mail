@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       resources :genres,      only: [:create, :index, :edit, :update, :destroy]
     end
     resources :posts,         only: [:show, :index,  :destroy]
-    resources :relationships, only: [:index]
+    resources :relationships, only:  :index
 
   end
 
@@ -26,13 +26,15 @@ Rails.application.routes.draw do
     get       :follows, :followers
     resources :rooms,         only: [:create, :show,  :index] do
     resources :chats,         only: [:create, :destroy]
-    resources :entries,       only: [:create]
+    resources :entries,       only:  :create
     end
-    resources :posts,         except: [:edit,   :update] do
-      resource :enpathy,      only:   [:create, :destroy]
+    resources   :posts,       except: [:edit,   :update] do
+      resource  :enpathy,     only:   [:create, :destroy]
       resources :comments,    only:   [:create, :destroy]
     end
-    resources :categories,    only:   [:index]
+    resources :categories,    only: :index do
+      resources :genres,      only: :index
+    end
     root to: 'homes#top'
     get      'home/about'      => 'homes#about'
     get      ':id/unsubscribe' => 'members#unsubscribe', as: 'unsubscribe'

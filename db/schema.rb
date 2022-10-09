@@ -122,12 +122,14 @@ ActiveRecord::Schema.define(version: 2022_10_05_014833) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "member_id", null: false
+    t.integer "category_id", null: false
     t.integer "genre_id"
     t.string "title", null: false
     t.string "body", null: false
     t.boolean "is_closed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["genre_id"], name: "index_posts_on_genre_id"
     t.index ["member_id"], name: "index_posts_on_member_id"
   end
@@ -156,6 +158,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_014833) do
   add_foreign_key "entries", "members"
   add_foreign_key "entries", "rooms"
   add_foreign_key "genres", "categories"
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "genres"
   add_foreign_key "posts", "members"
 end
