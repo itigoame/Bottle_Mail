@@ -3,9 +3,13 @@ class Member::MembersController < ApplicationController
 
 
   def show
-    @member = Member.find(params[:id])
-    @following_members = @member.following_members
-    @follower_members =  @member.follower_members
+      @member = Member.find(params[:id])
+    if current_member.gender == @member.gender
+      @following_members = @member.following_members
+      @follower_members =  @member.follower_members
+    else
+      redirect_to member_path(current_member)
+    end
   end
 
   def edit

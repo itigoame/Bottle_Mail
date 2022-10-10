@@ -1,6 +1,7 @@
 <div class="container">
 
   <% @posts.each do |post| %>
+  <% if current_member.gender == post.member.gender %>
     <div class="bg-info">
       <%= link_to post_path(post.id) do%>
 
@@ -28,7 +29,21 @@
 
       <div class="d-flex justify-content-center text-white">
         <div class="col-md-2">
-          いいね数
+          <% if current_member.empathies.find_by(post_id: post.id) %>
+            <%= link_to post_empathies_path(post_id: post.id),method: :delete do %>
+              <i class="fas fa-lightbulb text-warning"></i>
+              <span class = "text-white">
+                <%= post.empathies.count %>
+              </span>
+            <% end %>
+          <% else %>
+            <%= link_to post_empathies_path(post_id: post.id),method: :post do %>
+              <i class="far fa-lightbulb text-white"></i>
+              <span class = "text-white">
+                <%= post.empathies.count %>
+              </span>
+            <% end %>
+          <% end %>
         </div>
         <div class="col-md-2">
           コメント数
@@ -40,6 +55,7 @@
 
       <% end %>
     </div>
+  <% end %>
   <% end %>
 
 </div>

@@ -32,7 +32,7 @@ class Member < ApplicationRecord
   validates :name, presence: true
 
   has_many :comments, dependent: :destroy
-  has_many :empathys, dependent: :destroy
+  has_many :empathies, dependent: :destroy
   has_many :posts,    dependent: :destroy
   has_many :entries,  dependent: :destroy
   has_many :chats,    dependent: :destroy
@@ -49,7 +49,7 @@ class Member < ApplicationRecord
     followers.find_or_create_by(followed_id: member.id)
   end
 
-  def unfollow(member)
+  def unfollow(member_id)
     follower = followers.find_by(followed_id: member.id)
     follower.destroy if follower
   end

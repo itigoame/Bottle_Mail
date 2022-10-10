@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :entries,       only:  :create
     end
     resources   :posts,       except: [:edit,   :update] do
-      resource  :enpathy,     only:   [:create, :destroy]
+      resource  :empathies,    only:   [:create, :destroy]
       resources :comments,    only:   [:create, :destroy]
     end
     resources :categories,    only: :index do
