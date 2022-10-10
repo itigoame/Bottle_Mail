@@ -1,2 +1,34 @@
-<h1>Member::Post#show</h1>
-<p>Find me in app/views/member/post/show.html.erb</p>
+<div class="cantainer">
+
+  <div class="d-flex align-items-center">
+    <div class="col-md-2">
+      <%= image_tag @member.get_profile_image(100,100) %>
+    </div>
+    <div class="col-md-5">
+      <%= @member.name %>
+    </div>
+    <div class="col-md-5 text-right">
+      <%= @empathies.count %>
+      コメント数
+      戻る
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md">
+      <%= @post.title %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md">
+      <%= @post.body %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md"><%= @post.is_closed %></div>
+    <div class="col-md">コメント停止</div>
+    <div class="col-md">削除</div>
+  </div>
+</div>

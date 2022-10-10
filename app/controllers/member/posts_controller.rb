@@ -21,7 +21,9 @@ class Member::PostsController < ApplicationController
   end
 
   def show
-
+    @post = Post.find(params[:id])
+    @member = @post.member
+    @empathies = @post.empathies
   end
 
   def index

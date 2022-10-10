@@ -5,6 +5,11 @@ header{
   background-color: #191970;
 }
 
+// ハンバーガーメニュー
+.hide-frame {
+  border: none;
+}
+
 // memger categories index
 .card{
   background-color: #4169e1;
@@ -14,18 +19,14 @@ header{
   height: calc(100vh - 138px);
 }
 
-.hide-frame {
-  border: none;
-}
-
 img.logo-image {
-  width: 175px;
+  width: 150px;
   height: auto;
 }
 
 @media screen and (max-width: 576px) {
   img.logo-image {
-    width: 125px;
+    width: 120px;
     height: auto;
   }
 }
