@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :members,       only: [:show,   :edit, :update]
     resource  :relationships, only: [:create, :destroy]
     get       :follows, :followers
-    resources :rooms,         only: [:create, :show,  :index] do
+    resources :rooms,         only: [:create, :show, :index] do
     resources :chats,         only: [:create, :destroy]
     resources :entries,       only:  :create
     end

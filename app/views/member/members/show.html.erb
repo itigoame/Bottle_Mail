@@ -6,13 +6,29 @@
   </div>
   <div class="ml-auto col-md-4 text-right">
     <% if @member == current_member %>
-    <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
-    メッセージ一覧
+      <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
+      メッセージ一覧
     <% else %>
       <% if current_member.following?(@member) %>
         <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete %>
       <% else %>
         <%= link_to "フォローする",relationships_path(member_id: @member.id), method: :post %>
+      <% end %>
+      <!--相互フォローのみDM可-->
+      <% if current_member.following?(@member) && @member.following?(current_member) %>
+        
+        <% if @is_room == true %>
+          <%= link_to room_path(@room_id) do %>
+            <i class="fas fa-envelope"></i>
+          <% end %>
+        <% else %>
+          <%= form_with model: @room do |f| %>
+            <%= fields_for model: @entry do |e| %>
+            
+            <% end %>
+          <% end %>
+        <% end %>
+        
       <% end %>
     <% end %>
   </div>
@@ -75,6 +91,6 @@
 
         <% end %>
       </div>
-    <% end %>
+  <% end %>
 
 </div>
