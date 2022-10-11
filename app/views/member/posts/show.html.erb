@@ -1,2 +1,83 @@
-<h1>Member::Post#show</h1>
-<p>Find me in app/views/member/post/show.html.erb</p>
+<div class="container pb-2 border-bottom">
+  <div class="d-flex align-items-center mt-2">
+      <div class="col-md-1 px-0">
+        <%= link_to member_path(@member.id) do %>
+          <%= image_tag @member.get_profile_image(60,60) %>
+        <% end %>
+      </div>
+    <div class="col-md-6">
+      <%= link_to @member.name, member_path(@member.id),class: "text-body" %>
+    </div>
+    <div class="col-md-5 text-right">
+      <% if current_member.empathies.find_by(post_id: @post.id) %>
+        <%= link_to post_empathies_path(post_id: @post.id),method: :delete do %>
+          <i class="fas fa-lightbulb text-warning"></i>
+          <span class = "text-body">
+            <%= @empathies.count %>
+          </span>
+        <% end %>
+      <% else %>
+        <%= link_to post_empathies_path(post_id: @post.id),method: :post do %>
+          <i class="far fa-lightbulb text-secondary"></i>
+          <span class = "text-body">
+            <%= @empathies.count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <i class="fas fa-comment ml-3"></i><%= @comments.count %>
+      戻る
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md text-break">
+      <%= @post.title %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md text-break">
+      <%= @post.body %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md text-right">
+      <%= @post.closed_check %>
+      コメント停止
+      削除
+    </div>
+  </div>
+</div>
+
+<div class="container", style="ppading-bottom:50px;">
+  <% @comments.each do |comment| %>
+    <div class="row mt-3 ml-5">
+      <div class="col-md-9">
+        <%= image_tag comment.member.get_profile_image(30,30) %>
+        <%= comment.member.name %>
+        <% if comment.member_id == current_member.id %>
+          <%= link_to "削除", post_comment_path(@post.id,comment.id),method: :delete,class: "btn text-danger", data: {confirm: "コメントを削除しますか？"} %>
+        <% end %>
+      </div>
+      <div class="col-md-9 text-break">
+        <%= comment.body %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="container comment-form">
+  <%= form_with model: @comment,url: post_comments_path(@post.id),method: :post do |f| %>
+    <div class="row justify-content-center fixed-bottom">
+      <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
+        <%= flash[:create_alret] %>
+        <%= f.text_area :body, class: "form-control" %>
+      </div>
+      <div class="d-flex col-md-1 align-items-center">
+        <%= f.submit "送信",class: "btn btn-sm btn-outline-dark" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,36 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+header{
+  background-color: #191970;
+}
+
+// ハンバーガーメニュー
+.hide-frame {
+  border: none;
+}
+
 // memger categories index
 .card{
-  background-color: #87cefa;
+  background-color: #4169e1;
+}
+
+.main-heignt {
+  height: calc(100vh - 138px);
+}
+
+img.logo-image {
+  width: 150px;
+  height: auto;
+}
+
+.comment-form{
+  height: 20vh;
+}
+
+@media screen and (max-width: 576px) {
+  img.logo-image {
+    width: 120px;
+    height: auto;
+  }
 }

@@ -1,4 +1,5 @@
 <div class="cantainer">
+  <%= flash[:create_alret] %>
   <%= form_with model: @post do |f| %>
     <div class="row">
       <div class="col-md-3 my-3 text-right">タイトル</div>
@@ -10,16 +11,16 @@
     </div>
     <div class="row">
       <div class="col-md-3 my-3 text-right">カテゴリー選択</div>
-      <div class="col-md-4 my-3"><%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%></div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 my-3 text-right">ジャンル選択</div>
       <div class="col-md-4 my-3">
-        <%# @genres.each do |genre| %>
-          <%# template{id: "genre#{category.id}"} %>
-          <%#=f.collection_select :genre_id, @categories.genres, :id, :name, include_blank: "選択してください" %>
+        <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
       </div>
     </div>
+    <!--<div class="row">-->
+    <!--  <div class="post_genre col-md-3 my-3 text-right">ジャンル選択</div>-->
+    <!--  <div class="col-md-4 my-3">-->
+    <!--    <%#= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択してください" %>-->
+    <!--  </div>-->
+    <!--</div>-->
     <div class="row">
       <div class="col-md-3 text-right"><%= f.submit "投稿" %></div>
     </div>

@@ -1,2 +1,59 @@
-<h1>Admin::Members#show</h1>
-<p>Find me in app/views/admin/members/show.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    <%= @following_members.count %>フォロー
+    <%= @follower_members.count %>フォロワー
+    <%= @posts.count %>投稿
+  </div>
+  <div class="ml-auto col-md-2 ">
+    <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
+
+    メッセージ一覧
+  </div>
+</div>
+<div class="container pb-5 border-bottom">
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag @member.get_profile_image(100, 100) %>
+    </div>
+    <div class="col-md-5 align-self-center">
+      <div class="row mb-3"><%= @member.name %></div>
+      <div class="row"><%= @member.self_introduction %></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <% @posts.each do |post| %>
+      <div class="bg-info my-2">
+        <%= link_to admin_post_path(post.id) do%>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-6 text-break">
+            <%= post.title %>
+          </div>
+          <div class="col-md-4 text-right">
+            <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-10 text-break">
+            <%= post.body %>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-4">
+            <i class="fas fa-lightbulb text-warning"></i><%= post.empathies.count %>
+            <i class="fas fa-comment ml-3 mr-1"></i>     <%= post.comments.count %>
+          </div>
+          <div class="col-md-6 text-right">
+            <%= post.closed_check %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
+
+</div>

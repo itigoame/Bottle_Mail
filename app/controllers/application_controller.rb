@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_member,{only:[:home, :about]}
 
-  def after_sign_in_path
-    member_member_path
+  def after_sign_in_path_for(resource)
+    member_path(resource)
   end
 
   protected
