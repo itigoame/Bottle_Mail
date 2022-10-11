@@ -49,7 +49,7 @@ class Member < ApplicationRecord
     followers.find_or_create_by(followed_id: member.id)
   end
 
-  def unfollow(member_id)
+  def unfollow(member)
     follower = followers.find_by(followed_id: member.id)
     follower.destroy if follower
   end

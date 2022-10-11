@@ -57,14 +57,14 @@ class Member::MembersController < ApplicationController
     redirect_to root_path
   end
 
-  def follows
-    member = Member.find(params[:id])
-    @members = member.following_member
+  def followings
+    @member = Member.find(params[:member_id])
+    @members = @member.following_members
   end
 
   def followers
-    member = Member.find(params[:id])
-    @members = member.following_member
+    @member = Member.find(params[:member_id])
+    @members = @member.follower_members
   end
 
   private

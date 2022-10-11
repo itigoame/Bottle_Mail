@@ -21,12 +21,12 @@ Rails.application.routes.draw do
   end
 
   scope module: :member do
-    resources :members,       only: [:show,   :edit, :update]
+    resources :members,       only: [:show,   :edit, :update] do
+      get     :followers, :followings
+    end
     resource  :relationships, only: [:create, :destroy]
-    get       :follows, :followers
     resources :rooms,         only: [:create, :show, :index] do
     resources :chats,         only: [:create, :destroy]
-    resources :entries,       only:  :create
     end
     resources   :posts,       except: [:edit,   :update] do
       resource  :empathies,    only:   [:create, :destroy]
