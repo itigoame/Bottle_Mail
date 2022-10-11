@@ -7,5 +7,14 @@ class Post < ApplicationRecord
 
   validates :title,       presence: true, length: { minimum: 1, maximum: 20 }
   validates :body,        presence: true, length: { minimum: 1, maximum: 300 }
+  validates :category,    presence: true
+
+  def closed_check
+    if is_closed == false
+      "トーク中"
+    else
+      "トーク終了"
+    end
+  end
 
 end

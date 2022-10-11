@@ -7,8 +7,8 @@ class Member::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if @post.member_id = current_member.id
-      @post.save
+    @post.member_id = current_member.id
+    if @post.save
       redirect_to posts_path
     else
       flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
@@ -16,8 +16,6 @@ class Member::PostsController < ApplicationController
       @categories = Category.all
       render :new
     end
-
-
   end
 
   def show
@@ -42,6 +40,6 @@ class Member::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :is_closed, :genre_id, :category_id)
+    params.require(:post).permit(:title, :body, :genre_id, :category_id)
   end
 end

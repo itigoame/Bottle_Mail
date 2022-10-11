@@ -1,10 +1,12 @@
 <div class="container pb-2 border-bottom">
   <div class="d-flex align-items-center mt-2">
-    <div class="col-md-2">
-      <%= image_tag @member.get_profile_image(60,60) %>
-    </div>
-    <div class="col-md-5">
-      <%= @member.name %>
+      <div class="col-md-1 px-0">
+        <%= link_to member_path(@member.id) do %>
+          <%= image_tag @member.get_profile_image(60,60) %>
+        <% end %>
+      </div>
+    <div class="col-md-6">
+      <%= link_to @member.name, member_path(@member.id),class: "text-body" %>
     </div>
     <div class="col-md-5 text-right">
       <% if current_member.empathies.find_by(post_id: @post.id) %>
@@ -29,20 +31,20 @@
   </div>
 
   <div class="row">
-    <div class="col-md">
+    <div class="col-md text-break">
       <%= @post.title %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md">
+    <div class="col-md text-break">
       <%= @post.body %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md text-right">
-      <%= @post.is_closed %>
+      <%= @post.closed_check %>
       コメント停止
       削除
     </div>
