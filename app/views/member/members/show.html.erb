@@ -1,18 +1,42 @@
 <div class="container pb-2 border-bottom">
 <div class="row">
   <div class="col-md-4">
-    <%= @following_members.count %>フォロー
-    <%= @follower_members.count %>フォロワー
+    <%= link_to member_followings_path(@member.id) do %>
+      <%= @following_members.count %>フォロワー
+    <% end %>
+    <%= link_to member_followers_path(@member.id) do %>
+      <%= @follower_members.count %>フォロー
+    <% end %>
   </div>
   <div class="ml-auto col-md-4 text-right">
     <% if @member == current_member %>
-    <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
-    メッセージ一覧
+      <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
+      <%= link_to "メッセージ一覧", rooms_path %>
     <% else %>
       <% if current_member.following?(@member) %>
         <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete %>
       <% else %>
         <%= link_to "フォローする",relationships_path(member_id: @member.id), method: :post %>
+      <% end %>
+      <!--相互フォローのみDM可-->
+      <% if current_member.following?(@member) && @member.following?(current_member) %>
+
+        <% if @is_room == true %>
+          <%= link_to room_path(@room_id) do %>
+            <i class="fas fa-envelope"></i>
+          <% end %>
+        <% else %>
+          <%= form_with model: @is_room,url: rooms_path do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :member_id, value: @member.id %>
+              <%= f.button :type => "submit", style: 'border-style: none;' do %>
+                <i class="fas fa-envelope"></i>
+              <% end %>
+
+            <% end %>
+          <% end %>
+        <% end %>
+
       <% end %>
     <% end %>
   </div>
@@ -75,6 +99,6 @@
 
         <% end %>
       </div>
-    <% end %>
+  <% end %>
 
 </div>

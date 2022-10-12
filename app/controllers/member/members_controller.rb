@@ -6,8 +6,28 @@ class Member::MembersController < ApplicationController
     @member = Member.find(params[:id])
     if current_member.gender == @member.gender
       @following_members = @member.following_members
-      @follower_members =  @member.follower_members
+      @follower_members  = @member.follower_members
       @posts = @member.posts
+
+      # チャット機能
+      @current_entry = Entry.where(member_id: current_member.id)
+      @another_entry = Entry.where(member_id: @member.id)
+
+      unless @member.id == current_member.id
+        @current_entry.  each do |current|
+          @another_entry.each do |another|
+            if current.room_id == another.room_id
+              @is_room = true
+              @room_id = current.room_id
+            end
+          end
+        end
+        unless @is_room
+          @room  = Room.new
+          @entry = Entry.new
+        end
+      end
+
     else
       redirect_to member_path(current_member)
     end
@@ -37,14 +57,14 @@ class Member::MembersController < ApplicationController
     redirect_to root_path
   end
 
-  def follows
-    member = Member.find(params[:id])
-    @members = member.following_member
+  def followings
+    @member = Member.find(params[:member_id])
+    @members = @member.following_members
   end
 
   def followers
-    member = Member.find(params[:id])
-    @members = member.following_member
+    @member = Member.find(params[:member_id])
+    @members = @member.follower_members
   end
 
   private
