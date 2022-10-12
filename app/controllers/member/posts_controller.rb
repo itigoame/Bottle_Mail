@@ -1,5 +1,6 @@
 class Member::PostsController < ApplicationController
   def new
+    @category = Category.find(params[:category_id])
     @post = Post.new
     @categories = Category.all
     # @genres = Genre.all
@@ -35,7 +36,14 @@ class Member::PostsController < ApplicationController
   end
 
   def destroy
-
+    post = Post.find(params[:id])
+    member = post.member
+    if member == current_member
+      post.destroy
+      redirect_to member_path(member.id)
+    else
+      redirect_to posts_path
+    end
   end
 
   private

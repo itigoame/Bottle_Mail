@@ -1,5 +1,6 @@
 <div class="cantainer">
   <%= flash[:create_alret] %>
+  <%= @category.name %>
   <%= form_with model: @post do |f| %>
     <div class="row">
       <div class="col-md-3 my-3 text-right">タイトル</div>

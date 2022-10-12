@@ -46,8 +46,10 @@
   <div class="row">
     <div class="col-md text-right">
       <%= @post.closed_check %>
-      コメント停止
-      削除
+      <% if @post.member == current_member %>
+        コメント停止
+        <%= link_to "削除", post_path(@post.id), method: :delete,data: {confirm: "投稿を削除しますか？"} %>
+      <% end %>
     </div>
   </div>
 </div>
