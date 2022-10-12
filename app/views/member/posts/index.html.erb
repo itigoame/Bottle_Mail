@@ -27,7 +27,7 @@
       </div>
 
       <div class="d-flex justify-content-center text-white">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <% if current_member.empathies.find_by(post_id: post.id) %>
             <%= link_to post_empathies_path(post_id: post.id),method: :delete do %>
               <i class="fas fa-lightbulb text-warning"></i>
@@ -35,6 +35,10 @@
                 <%= post.empathies.count %>
               </span>
             <% end %>
+            <i class="fas fa-comment text-white  ml-3"></i>
+            <span class = "text-white">
+              <%= post.comments.count %>
+            </span>
           <% else %>
             <%= link_to post_empathies_path(post_id: post.id),method: :post do %>
               <i class="far fa-lightbulb text-white"></i>
@@ -42,11 +46,13 @@
                 <%= post.empathies.count %>
               </span>
             <% end %>
+            <i class="fas fa-comment text-white  ml-3"></i>
+            <span class = "text-white">
+              <%= post.comments.count %>
+            </span>
           <% end %>
         </div>
-        <div class="col-md-2">
-          コメント数
-        </div>
+
         <div class="col-md-6 text-right">
           ステータス
         </div>

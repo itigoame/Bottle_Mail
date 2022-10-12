@@ -11,7 +11,7 @@
   <div class="ml-auto col-md-4 text-right">
     <% if @member == current_member %>
       <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
-      メッセージ一覧
+      <%= link_to "メッセージ一覧", rooms_path %>
     <% else %>
       <% if current_member.following?(@member) %>
         <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete %>
@@ -26,7 +26,7 @@
             <i class="fas fa-envelope"></i>
           <% end %>
         <% else %>
-          <%= form_with model: @is_room do |f| %>
+          <%= form_with model: @is_room,url: rooms_path do |f| %>
             <%= fields_for @entry do |e| %>
               <%= e.hidden_field :member_id, value: @member.id %>
               <%= f.button :type => "submit", style: 'border-style: none;' do %>
