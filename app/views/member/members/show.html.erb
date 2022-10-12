@@ -27,9 +27,9 @@
           <% end %>
         <% else %>
           <%= form_with model: @is_room,url: rooms_path do |f| %>
-            <%= fields_for @entry do |e| %>
-              <%= e.hidden_field :member_id, value: @member.id %>
-              <%= f.button :type => "submit", style: 'border-style: none;' do %>
+            <%= fields_for @entry do |entry| %>
+              <%= entry.hidden_field :member_id, value: @member.id %>
+              <%= f.button :type => "submit", class: 'dm-button' do %>
                 <i class="fas fa-envelope"></i>
               <% end %>
 

@@ -34,3 +34,17 @@ img.logo-image {
     height: auto;
   }
 }
+
+.empathy_count:hover {
+  // background-color: yellow;
+  border-bottom: solid 1px #000;
+}
+
+.dm-button {
+  border-style: none;
+  background-color: #fff;
+}
+
+.dm-button:focus {
+  outline: solid 5px #fff;
+}

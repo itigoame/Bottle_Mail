@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get      'home/about'      => 'homes#about'
     get      ':id/unsubscribe' => 'members#unsubscribe', as: 'unsubscribe'
     patch    ':id/withdrawal'  => 'members#withdrawal',  as: 'withdrawal'
-
+    get '/get_genres' => 'categories#get_genres'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

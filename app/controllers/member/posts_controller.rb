@@ -1,6 +1,6 @@
 class Member::PostsController < ApplicationController
   def new
-    @category = Category.find(params[:category_id])
+    # @category = Category.find(params[:category_id])
     @post = Post.new
     @categories = Category.all
     # @genres = Genre.all

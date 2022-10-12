@@ -9,23 +9,11 @@
     <div class="col-md-6">
       <%= link_to @member.name, member_path(@member.id),class: "text-body" %>
     </div>
+    <!--いいねボタン-->
     <div class="col-md-5 text-right">
-      <% if current_member.empathies.find_by(post_id: @post.id) %>
-        <%= link_to post_empathies_path(post_id: @post.id),method: :delete do %>
-          <i class="fas fa-lightbulb text-warning"></i>
-          <span class = "text-body">
-            <%= @empathies.count %>
-          </span>
-        <% end %>
-      <% else %>
-        <%= link_to post_empathies_path(post_id: @post.id),method: :post do %>
-          <i class="far fa-lightbulb text-secondary"></i>
-          <span class = "text-body">
-            <%= @empathies.count %>
-          </span>
-        <% end %>
-      <% end %>
-
+      <span class="p-1 empathy_count" >
+        <%= render "member/empathies/empathy_link", post: @post, empathies: @empathies %>
+      </span>
       <i class="fas fa-comment ml-3"></i><%= @comments.count %>
       戻る
     </div>
@@ -37,9 +25,13 @@
     </div>
   </div>
 
+  <div>
+    <%= @post.category.name %> > <%= @post.genre.name %>
+  </div>
+
   <div class="row">
     <div class="col-md text-break">
-      <%= @post.body %>
+      <%= simple_format(@post.body) %>
     </div>
   </div>
 
@@ -72,7 +64,7 @@
       </div>
 
       <div class="col-md-9 text-break">
-        <%= comment.body %>
+        <%= simple_format(comment.body) %>
       </div>
 
     </div>
