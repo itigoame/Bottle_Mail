@@ -1,9 +1,7 @@
 class Member::PostsController < ApplicationController
   def new
-    @category = Category.find(params[:category_id])
     @post = Post.new
     @categories = Category.all
-    # @genres = Genre.all
   end
 
   def create
@@ -32,7 +30,19 @@ class Member::PostsController < ApplicationController
   end
 
   def index
+    # @category = Category.find(params[:category_id])
+    # @posts = @category.posts
     @posts = Post.all
+  end
+
+  def update
+    post = Post.find(params[:id])
+    member = post.member
+    if post.update(post_params)
+      redirect_to post_path(post.id)
+    else
+      render :show
+    end
   end
 
   def destroy
@@ -48,6 +58,6 @@ class Member::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :genre_id, :category_id)
+    params.require(:post).permit(:title, :body, :genre_id, :category_id, :is_closed)
   end
 end

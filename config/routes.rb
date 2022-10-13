@@ -28,19 +28,21 @@ Rails.application.routes.draw do
     resources :rooms,         only: [:create, :show, :index] do
     resources :chats,         only: [:create, :destroy]
     end
-    resources   :posts,       except: [:edit,   :update] do
-      resource  :empathies,    only:   [:create, :destroy]
+    resources   :posts,       except: [:edit] do
+      resource  :empathies,   only:   [:create, :destroy]
       resources :comments,    only:   [:create, :destroy]
     end
-    resources :categories,    only: :index do
+    resources   :categories,  only: :index do
       resources :genres,      only: :index
     end
     root to: 'homes#top'
     get      'home/about'      => 'homes#about'
     get      ':id/unsubscribe' => 'members#unsubscribe', as: 'unsubscribe'
     patch    ':id/withdrawal'  => 'members#withdrawal',  as: 'withdrawal'
-
+    get '/get_genres' => 'categories#get_genres'
   end
+
+  get "search" => "searches#search"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

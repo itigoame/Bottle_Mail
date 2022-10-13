@@ -1,70 +1,49 @@
 <div class="container">
-
-  <div class="d-flex justify-content-end">
-    <div class="col-md-10 text-right mt-3">
-    <%= link_to "新規投稿", new_post_path %>
-    </div>
-  </div>
+<%#= @category.name %>
+  <%#= render "search/search-form" %>
 
   <% @posts.each do |post| %>
   <% if current_member.gender == post.member.gender %>
     <div class="bg-info mb-2">
       <%= link_to post_path(post.id) do %>
-      <div class="d-flex justify-content-center mt-3 px-2 py-2 bg-info text-white">
-        <div class="col-md-8">
-          <%= image_tag post.member.get_profile_image(50, 50),class: "mr-3" %>
-          <%= post.member.name %>
+        <div class="d-flex justify-content-center mt-3 px-2 py-2 bg-info text-white">
+          <div class="col-md-8">
+            <%= image_tag post.member.get_profile_image(50, 50),class: "mr-3" %>
+            <%= post.member.name %>
+          </div>
+          <div class="col-md-2">
+            <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
         </div>
-        <div class="col-md-2">
-          <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
-        </div>
-      </div>
 
-      <div class="d-flex justify-content-center text-white">
-        <div class="col-md-10">
-          <%= post.title %>
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-10">
+            <%= post.title %>
+          </div>
         </div>
-      </div>
 
-      <div class="d-flex justify-content-center text-white">
-        <div class="col-md-10">
-          <%= post.body %>
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-10">
+            <%= post.body %>
+          </div>
         </div>
-      </div>
-
+      <% end %>
       <div class="d-flex justify-content-center text-white">
         <div class="col-md-4">
-          <% if current_member.empathies.find_by(post_id: post.id) %>
-            <%= link_to post_empathies_path(post_id: post.id),method: :delete do %>
-              <i class="fas fa-lightbulb text-warning"></i>
-              <span class = "text-white">
-                <%= post.empathies.count %>
-              </span>
-            <% end %>
+          <!--<span id="empathy_counts<%#= post.id %>" >-->
+          <!--  <%#= render "member/empathies/empathy_link", post: @post, empathies: @empathies %>-->
+          <!--</span>-->
             <i class="fas fa-comment text-white  ml-3"></i>
             <span class = "text-white">
               <%= post.comments.count %>
             </span>
-          <% else %>
-            <%= link_to post_empathies_path(post_id: post.id),method: :post do %>
-              <i class="far fa-lightbulb text-white"></i>
-              <span class = "text-white">
-                <%= post.empathies.count %>
-              </span>
-            <% end %>
-            <i class="fas fa-comment text-white  ml-3"></i>
-            <span class = "text-white">
-              <%= post.comments.count %>
-            </span>
-          <% end %>
         </div>
 
         <div class="col-md-6 text-right">
-          ステータス
+          <%= post.closed_check %>
         </div>
       </div>
 
-      <% end %>
     </div>
   <% end %>
   <% end %>
