@@ -2,14 +2,14 @@
   <%= link_to post_empathies_path(post_id: post.id), class: 'text-decoration-none', method: :delete,remote: true do %>
     <i class="fas fa-lightbulb text-warning"></i>
     <span class = "text-body">
-      <%= empathies.count %>
+      <%= post.empathies.count %>
     </span>
   <% end %>
 <% else %>
   <%= link_to post_empathies_path(post_id: post.id), class: 'text-decoration-none', method: :post,remote: true do %>
     <i class="far fa-lightbulb text-secondary"></i>
     <span class = "text-body">
-      <%= empathies.count %>
+      <%= post.empathies.count %>
     </span>
   <% end %>
 <% end %>

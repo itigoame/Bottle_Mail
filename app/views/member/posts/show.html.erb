@@ -11,7 +11,7 @@
     </div>
     <!--いいねボタン-->
     <div class="col-md-5 text-right">
-      <span class="p-1 empathy_count" >
+      <span id ="empathy_count<%= @post.id %>" >
         <%= render "member/empathies/empathy_link", post: @post, empathies: @empathies %>
       </span>
       <i class="fas fa-comment ml-3"></i><%= @comments.count %>
@@ -25,9 +25,6 @@
     </div>
   </div>
 
-  <div>
-    <%= @post.category.name %> > <%= @post.genre.name %>
-  </div>
 
   <div class="row">
     <div class="col-md text-break">
@@ -35,13 +32,25 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md text-right">
-      <%= @post.closed_check %>
+  <div class="row justify-content-between">
+  <div class = "col-md-6">
+    カテゴリー:<%= @post.category.name %>
+    <% if @post.genre.present? %>
+      ジャンル:<%= @post.genre.name %>
+    <% end %>
+  </div>
+    <div class="col-md-4 text-right">
       <% if @post.member == current_member %>
-        コメント停止
-        <%= link_to "削除", post_path(@post.id), method: :delete,data: {confirm: "投稿を削除しますか？"} %>
+      <% @post.is_closed? %>
+        <% if @post.is_closed %>
+          <%= link_to "トーク中にもどす", post_path(@post.id, post: {is_closed: false}),method: :patch %>
+        <% else %>
+          <%= link_to "トークを終了する", post_path(@post.id, post: {is_closed: true}),method: :patch %>
+        <% end %>
+      <% else %>
+        <%= @post.closed_check %>
       <% end %>
+        <%= link_to "削除", post_path(@post.id), method: :delete,data: {confirm: "投稿を削除しますか？"} %>
     </div>
   </div>
 </div>
@@ -72,18 +81,20 @@
 </div>
 
 <div class="container form-design">
-  <%= form_with model: @comment,url: post_comments_path(@post.id),method: :post do |f| %>
-    <div class="row justify-content-center fixed-bottom">
+  <% if @post.is_closed == false %>
+    <%= form_with model: @comment,url: post_comments_path(@post.id),method: :post do |f| %>
+      <div class="row justify-content-center fixed-bottom">
 
-      <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
-        <%= flash[:create_alret] %>
-        <%= f.text_area :body, class: "form-control" %>
+        <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
+          <%= flash[:create_alret] %>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+
+        <div class="d-flex col-md-1 align-items-center">
+          <%= f.submit "送信",class: "btn btn-sm btn-outline-dark" %>
+        </div>
+
       </div>
-
-      <div class="d-flex col-md-1 align-items-center">
-        <%= f.submit "送信",class: "btn btn-sm btn-outline-dark" %>
-      </div>
-
-    </div>
+    <% end %>
   <% end %>
 </div>
