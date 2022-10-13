@@ -11,7 +11,7 @@
     </div>
     <!--いいねボタン-->
     <div class="col-md-5 text-right">
-      <span id ="empathy_count<%= @post.id %>" >
+      <span id ="empathy_counts<%= @post.id %>" >
         <%= render "member/empathies/empathy_link", post: @post, empathies: @empathies %>
       </span>
       <i class="fas fa-comment ml-3"></i><%= @comments.count %>

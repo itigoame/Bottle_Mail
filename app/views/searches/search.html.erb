@@ -1,0 +1,5 @@
+<% @members.each do |member| %>
+<% if current_member.gender == member.gender %>
+  <%= member.name %>
+<% end %>
+<% end %>

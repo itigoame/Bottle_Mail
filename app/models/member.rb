@@ -58,4 +58,13 @@ class Member < ApplicationRecord
     follower_members.include?(member)
   end
 
+  # 検索
+  def self.looks(word)
+    if word
+      @user = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")
+      # where('title LIKE ? OR body LIKE ?', "%#{keyword}%", "%#{keyword}%")
+    else
+      @user = Member.all
+    end
+  end
 end

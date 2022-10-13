@@ -30,9 +30,9 @@ class Member::PostsController < ApplicationController
   end
 
   def index
-    # @category = Category.find(params[:category_id])
-    # @posts = @category.posts
-    @posts = Post.all
+    @category = Category.find(params[:category_id])
+    @posts = @category.posts.order(created_at: "DESC")
+    @genres = @category.genres
   end
 
   def update
