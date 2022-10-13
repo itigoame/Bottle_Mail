@@ -28,12 +28,13 @@ Rails.application.routes.draw do
     resources :rooms,         only: [:create, :show, :index] do
     resources :chats,         only: [:create, :destroy]
     end
-    resources   :posts,       except: [:edit] do
+    resources   :posts,       except: [:edit, :index] do
       resource  :empathies,   only:   [:create, :destroy]
       resources :comments,    only:   [:create, :destroy]
     end
     resources   :categories,  only: :index do
       resources :genres,      only: :index
+      resources :posts,    only:  :index
     end
     root to: 'homes#top'
     get      'home/about'      => 'homes#about'

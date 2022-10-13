@@ -17,4 +17,13 @@ class Post < ApplicationRecord
     end
   end
 
+  # 検索
+  def self.looks(word)
+    if word
+      @post = Post.where("title LIKE?","%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
+
 end
