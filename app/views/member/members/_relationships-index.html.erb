@@ -1,17 +1,17 @@
 <% members.each do |member| %>
-  <div class="row my-2">
+  <div class="d-flex justify-content-center">
     <%= link_to member_path(member.id) do %>
-      <div class="col-md-1 col-sm-1">
+      <div class="col-md-1">
         <%= image_tag member.get_profile_image(50,50) %>
       </div>
     <% end %>
     <%= link_to member_path(member.id) do %>
-      <div class="d-lex flex-column col-md-6 col-sm-5">
-        <div class="col"><%= member.name %></div>
-        <div class="col text-break"><%= member.self_introduction %></div>
+      <div class="d-flex col-12 flex-column">
+        <div class="col-md-12"><%= member.name %></div>
+        <div class="col-md-12"><%= member.self_introduction %></div>
       </div>
     <% end %>
-    <div class="col-md-5 ml-auto text-right col-sm-5">
+    <div class="col-md-2 ml-5 small">
       <% unless member == current_member %>
         <% if current_member.following?(member) %>
           <%= link_to "フォローをやめる",relationships_path(member_id: member.id), method: :delete %>
@@ -22,4 +22,3 @@
     </div>
   </div>
   <% end %>
-</div>

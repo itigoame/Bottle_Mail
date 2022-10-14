@@ -19,7 +19,9 @@
   <div class="ml-auto col-md-4 text-right">
     <% if @member == current_member %>
       <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
-      <%= link_to "メッセージ一覧", rooms_path %>
+      <%= link_to rooms_path do %>
+        <i class="fas fa-envelope"></i>
+      <% end %>
     <% else %>
       <% if current_member.following?(@member) %>
         <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete %>
