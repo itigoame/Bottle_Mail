@@ -1,5 +1,4 @@
 <div class="container">
-<%#= @category.name %>
   <%= render "searches/search-form" %>
 <div class="row">
   <div class="col-md-7 search_form">
@@ -41,7 +40,7 @@
             <%= render "member/empathies/empathy_link", post: post, empathies: @empathies %>
           </span>
             <i class="fas fa-comment text-white  ml-3"></i>
-            <span class = "text-white">
+            <span class = "text-secondary">
               <%= post.comments.count %>
             </span>
         </div>

@@ -14,7 +14,7 @@
       <span id ="empathy_counts<%= @post.id %>" >
         <%= render "member/empathies/empathy_link", post: @post, empathies: @empathies %>
       </span>
-      <i class="fas fa-comment ml-3"></i><%= @comments.count %>
+      <i class="fas fa-comment ml-3 text-secondary"></i><span class ="text-secondary"><%= @comments.count %></span>
       戻る
     </div>
   </div>
