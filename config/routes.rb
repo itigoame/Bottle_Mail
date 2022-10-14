@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     resources :rooms,         only: [:show,   :index]
     resources :categories,    only: [:create, :index, :edit, :update, :destroy, :show] do
       resources :genres,      only: [:create, :index, :edit, :update, :destroy]
+      resources :posts,       only:  :index
     end
-    resources :posts,         only: [:show, :index,  :destroy]
+    resources :posts,         only: [:show, :destroy]
     resources :relationships, only:  :index
 
   end
