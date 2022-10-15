@@ -1,5 +1,6 @@
+<div class="container mt-3">
 <%= flash[:edit_alret] %>
-<h3>カテゴリー編集: <%= @category.name %></h3>
+<h4>カテゴリー編集: <%= @category.name %></h4>
 
 
 <%= form_with model: @category, url: admin_category_path(@category.id) do |f| %>
@@ -14,9 +15,10 @@
   </tr>
   <tr>
     <td>
-      <%= f.submit "編集" %>
+      <%= f.submit "編集",class: "btn btn-sm btn-secondary" %>
     </td>
   </tr>
 </table>
 
 <% end %>
+</div>

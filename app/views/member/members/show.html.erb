@@ -1,17 +1,27 @@
-<div class="container pb-2 border-bottom">
-<div class="row">
+<div class="container py-2 border-bottom">
+<div class="row flex-nowrap">
   <div class="col-md-4">
-    <%= link_to member_followings_path(@member.id) do %>
-      <%= @following_members.count %>フォロワー
-    <% end %>
-    <%= link_to member_followers_path(@member.id) do %>
-      <%= @follower_members.count %>フォロー
-    <% end %>
+    <div class="row flex-nowrap">
+      <div class="col-md-4 text-center small">
+        <%= link_to member_followings_path(@member.id) do %>
+          <%= @following_members.count %><br>
+          フォロワー
+        <% end %>
+      </div>
+      <div class="col-md-4 text-center small">
+        <%= link_to member_followers_path(@member.id) do %>
+          <%= @follower_members.count %><br>
+          フォロー
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="ml-auto col-md-4 text-right">
     <% if @member == current_member %>
       <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
-      <%= link_to "メッセージ一覧", rooms_path %>
+      <%= link_to rooms_path do %>
+        <i class="fas fa-envelope"></i>
+      <% end %>
     <% else %>
       <% if current_member.following?(@member) %>
         <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete %>
@@ -47,7 +57,7 @@
     </div>
     <div class="col-md-5 align-self-center">
       <div class="row mb-3"><%= @member.name %></div>
-      <div class="row"><%= @member.self_introduction %></div>
+      <div class="row"><%= simple_format(@member.self_introduction) %></div>
     </div>
   </div>
 </div>
@@ -56,7 +66,7 @@
   <%= @posts.count %>投稿
   <% @posts.each do |post| %>
       <div class="bg-info my-2">
-        <%= link_to post_path(post.id) do%>
+        <%= link_to post_path(post.id) do %>
 
         <div class="d-flex justify-content-center text-white">
           <div class="col-md-6 text-break">
@@ -72,32 +82,25 @@
             <%= post.body %>
           </div>
         </div>
+        <% end %>
 
         <div class="d-flex justify-content-center text-white">
           <div class="col-md-4">
-            <% if current_member.empathies.find_by(post_id: post.id) %>
-              <%= link_to post_empathies_path(post_id: post.id),method: :delete do %>
-                <i class="fas fa-lightbulb text-warning"></i>
-                <span class = "text-white">
-                  <%= post.empathies.count %>
-                </span>
-              <% end %>
-            <% else %>
-              <%= link_to post_empathies_path(post_id: post.id),method: :post do %>
-                <i class="far fa-lightbulb text-white"></i>
-                <span class = "text-white">
-                  <%= post.empathies.count %>
-                </span>
-              <% end %>
-            <% end %>
-            <i class="fas fa-comment ml-3 mr-1"></i><%= post.comments.count %>
+            <span id="empathy_counts<%= post.id %>" >
+              <!--いいね機能テンプレート-->
+              <%= render "member/empathies/empathy_link", post: post %>
+            </span>
+            <i class="fas fa-comment text-white  ml-3"></i>
+            <span class = "text-secondary">
+              <%= post.comments.count %>
+            </span>
           </div>
           <div class="col-md-6 text-right">
             <%= post.closed_check %>
           </div>
         </div>
 
-        <% end %>
+
       </div>
   <% end %>
 

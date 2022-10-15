@@ -1,27 +1,34 @@
-<h3>カテゴリー一覧</h3>
+<div class="container mt-3">
+<h4>カテゴリー一覧</h4>
 
 <%= flash[:creat_alret] %>
-
-<%= form_with model: @category, url: admin_categories_path do |f| %>
-  <%= f.text_field :name %>
-  <%= f.submit "追加" %>
-<% end %>
+<div class="my-3">
+  <%= form_with model: @category, url: admin_categories_path do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "追加",class: "btn btn-sm btn-secondary" %>
+  <% end %>
+</div>
 
 <% @categories.each do |category| %>
-  <table>
-    <tr>
-      <td>
-      <%= category.name %>
+  <table class= "table my-auto">
+    <tbody>
+      <tr>
+      <td width="60">
+        <%= link_to admin_category_posts_path(category.id) do %>
+          <%= category.name %>
+        <% end %>
       </td>
-      <td>
+      <td width="5">
         <%= link_to "編集", edit_admin_category_path(category.id) %>
       </td>
-      <td>
+      <td width="5">
         <%= link_to "削除", admin_category_path(category.id),method: :delete, data: {confirm: "カテゴリーを削除するとカテゴリーに登録されているジャンル、投稿全てが削除されます。本当に削除しますか？"} %>
       </td>
-      <td>
+      <td width="30">
         <%= link_to "ジャンル追加", admin_category_path(category.id) %>
       </td>
     </tr>
+    <tbody>
   </table>
 <% end %>
+</div>

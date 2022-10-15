@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_member,{only:[:home, :about]}
 
   def after_sign_in_path_for(resource)
-    member_path(resource)
+    case resource
+    when Admin
+      admin_members_path
+    when Member
+      member_path(resource)
+    end
   end
 
   protected

@@ -20,10 +20,14 @@ class Post < ApplicationRecord
   # 検索
   def self.looks(word)
     if word
-      @post = Post.where("title LIKE?","%#{word}%")
+      @post = Post.where("title LIKE ? OR body LIKE ?","%#{word}%","%#{word}%")
     else
       @post = Post.all
     end
+  end
+
+  def empathy_by?(member)
+    empathies.exists?(member_id: member.id)
   end
 
 end

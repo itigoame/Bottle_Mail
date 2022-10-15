@@ -8,7 +8,7 @@ class Member::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     if @post.save
-      redirect_to posts_path
+      redirect_to post_path(@post.id)
     else
       flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
       @post       = Post.new
@@ -25,7 +25,7 @@ class Member::PostsController < ApplicationController
       @comment = Comment.new
       @comments = @post.comments
     else
-      redirect_to posts_path
+      redirect_to root_path
     end
   end
 
