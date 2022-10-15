@@ -17,6 +17,6 @@ class Admin::PostsController < ApplicationController
     post = Post.find(params[:id])
     member = post.member.id
     post.destroy
-    redirect_to admin_member_path(member.id)
+    redirect_to admin_member_path(member)
   end
 end

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :members,       only: [:show,   :edit, :index, :update]
+    resources :members,       only: [:show,   :edit, :index, :update] do
+    end
     resources :rooms,         only: [:show,   :index]
     resources :categories,    only: [:create, :index, :edit, :update, :destroy, :show] do
       resources :genres,      only: [:create, :index, :edit, :update, :destroy]
