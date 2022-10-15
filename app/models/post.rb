@@ -26,4 +26,8 @@ class Post < ApplicationRecord
     end
   end
 
+  def empathy_by?(member)
+    empathies.exists?(member_id: member.id)
+  end
+
 end

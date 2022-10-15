@@ -1,15 +1,11 @@
 <% members.each do |member| %>
-  <div class="d-flex justify-content-center">
-    <%= link_to member_path(member.id) do %>
-      <div class="col-md-1">
-        <%= image_tag member.get_profile_image(50,50) %>
-      </div>
+  <div class="row d-flex">
+    <%= link_to member_path(member.id),class: "col-md-1" do %>
+      <%= image_tag member.get_profile_image(50,50) %>
     <% end %>
-    <%= link_to member_path(member.id) do %>
-      <div class="d-flex col-12 flex-column">
-        <div class="col-md-12"><%= member.name %></div>
-        <div class="col-md-12"><%= member.self_introduction %></div>
-      </div>
+    <%= link_to member_path(member.id),class: "row col-6" do %>
+      <div class="col-md-12"><%= member.name %></div>
+      <div class="col-md-12"><%= member.self_introduction %></div>
     <% end %>
     <div class="col-md-2 ml-5 small">
       <% unless member == current_member %>

@@ -1,7 +1,7 @@
 <div class="main-heignt">
   <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
   <%= flash[:create_alret] %>
-  <%= form_with model: @post do |f| %>
+  <%= form_with model: @post,url: posts_path,method: :post do |f| %>
     <div class="row">
       <div class="col-md-5 my-2 md-my-3 text-left text-md-right">タイトル</div>
       <div class="col-md-4 my-2 md-my-3"><%= f.text_field :title %></div>
