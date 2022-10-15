@@ -1,0 +1,46 @@
+<div class="container">
+  <table class = "table mt-5">
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          gender
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+      <% if member.is_active == false %>
+        <tr class = "text-info">
+          <td>
+            <%= link_to member.name,admin_member_path(member.id),class: "text-info" %>
+          </td>
+          <td>
+            <%= member.gender_i18n %>
+          </td>
+          <td>
+            <%= member.status_display %>
+          </td>
+        </tr>
+      <% else %>
+        <tr>
+          <td>
+            <%= link_to member.name,admin_member_path(member.id),class: "text-body" %>
+          </td>
+          <td>
+            <%= member.gender_i18n %>
+          </td>
+          <td>
+            <%= member.status_display %>
+          </td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,107 @@
+<div class="container py-2 border-bottom">
+<div class="row flex-nowrap">
+  <div class="col-md-4">
+    <div class="row flex-nowrap">
+      <div class="col-md-4 text-center small">
+        <%= link_to member_followings_path(@member.id) do %>
+          <%= @following_members.count %><br>
+          フォロワー
+        <% end %>
+      </div>
+      <div class="col-md-4 text-center small">
+        <%= link_to member_followers_path(@member.id) do %>
+          <%= @follower_members.count %><br>
+          フォロー
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="ml-auto col-md-4 text-right">
+    <% if @member == current_member %>
+      <%= link_to "プロフィール編集",edit_member_path(@member.id) %>
+      <%= link_to rooms_path do %>
+        <i class="fas fa-envelope"></i>
+      <% end %>
+    <% else %>
+      <% if current_member.following?(@member) %>
+        <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete %>
+      <% else %>
+        <%= link_to "フォローする",relationships_path(member_id: @member.id), method: :post %>
+      <% end %>
+      <!--相互フォローのみDM可-->
+      <% if current_member.following?(@member) && @member.following?(current_member) %>
+
+        <% if @is_room == true %>
+          <%= link_to room_path(@room_id) do %>
+            <i class="fas fa-envelope"></i>
+          <% end %>
+        <% else %>
+          <%= form_with model: @is_room,url: rooms_path do |f| %>
+            <%= fields_for @entry do |entry| %>
+              <%= entry.hidden_field :member_id, value: @member.id %>
+              <%= f.button :type => "submit", class: 'dm-button' do %>
+                <i class="fas fa-envelope"></i>
+              <% end %>
+
+            <% end %>
+          <% end %>
+        <% end %>
+
+      <% end %>
+    <% end %>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag @member.get_profile_image(100, 100) %>
+    </div>
+    <div class="col-md-5 align-self-center">
+      <div class="row mb-3"><%= @member.name %></div>
+      <div class="row"><%= simple_format(@member.self_introduction) %></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= @posts.count %>投稿
+  <% @posts.each do |post| %>
+      <div class="bg-info my-2">
+        <%= link_to post_path(post.id) do %>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-6 text-break">
+            <%= post.title %>
+          </div>
+          <div class="col-md-4 text-right">
+            <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-10 text-break">
+            <%= post.body %>
+          </div>
+        </div>
+        <% end %>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-4">
+            <span id="empathy_counts<%= post.id %>" >
+              <!--いいね機能テンプレート-->
+              <%= render "member/empathies/empathy_link", post: post %>
+            </span>
+            <i class="fas fa-comment text-white  ml-3"></i>
+            <span class = "text-secondary">
+              <%= post.comments.count %>
+            </span>
+          </div>
+          <div class="col-md-6 text-right">
+            <%= post.closed_check %>
+          </div>
+        </div>
+
+
+      </div>
+  <% end %>
+
+</div>

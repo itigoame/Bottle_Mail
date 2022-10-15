@@ -1,0 +1,55 @@
+<div class="container mt-3">
+  <%= render "searches/search-form" %>
+<div class="row">
+  <div class="col-md-7 search_form">
+    <%= form_with url: search_path, method: :get do |f| %>
+      <%= f.collection_select :genre_id, @genres, :id, :name ,include_blank: "選択してください"%>
+      <%= f.submit "検索", class: "btn btn-sm" %>
+    <% end %>
+  </div>
+</div>
+  <% @posts.each do |post| %>
+    <div class="bg-info mb-2">
+      <%= link_to admin_post_path(post.id) do %>
+        <div class="d-flex justify-content-center mt-3 px-2 py-2 bg-info text-white">
+          <div class="col-md-8">
+            <%= image_tag post.member.get_profile_image(50, 50),class: "mr-3" %>
+            <%= post.member.name %>
+          </div>
+          <div class="col-md-2">
+            <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-10">
+            <%= post.title %>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center text-white">
+          <div class="col-md-10">
+            <%= post.body %>
+          </div>
+        </div>
+      <% end %>
+      <div class="d-flex justify-content-center text-white">
+        <div class="col-md-4">
+          <span id="empathy_counts<%= post.id %>" >
+            <%= render "member/empathies/empathy_link", post: post, empathies: @empathies %>
+          </span>
+            <i class="fas fa-comment text-white  ml-3"></i>
+            <span class = "text-secondary">
+              <%= post.comments.count %>
+            </span>
+        </div>
+
+        <div class="col-md-6 text-right">
+          <%= post.closed_check %>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+</div>

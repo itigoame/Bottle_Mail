@@ -1,0 +1,45 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+header{
+  background-color: #191970;
+}
+
+// ハンバーガーメニュー
+.hide-frame {
+  border: none;
+}
+
+.main-heignt {
+  height: calc(100vh - 138px);
+}
+
+img.logo-image {
+  width: 150px;
+  height: auto;
+}
+
+.form-design{
+  height: 20vh;
+}
+
+@media screen and (max-width: 576px) {
+  img.logo-image {
+    width: 120px;
+    height: auo;
+  }
+}
+
+.empathy_count:hover {
+  // background-color: yellow;
+  border-bottom: solid 1px #000;
+}
+
+.dm-button {
+  border-style: none;
+  background-color: #fff;
+}
+
+.dm-button:focus {
+  outline: solid 5px #fff;
+}

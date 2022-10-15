@@ -1,0 +1,37 @@
+<div class="container">
+  <h3>ジャンル一覧</h3>
+
+<% @categories.each do |category| %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= category.name %>
+    </div>
+  </div>
+  <% if category.genres.empty? %>
+      <div class="col-md-3 text-center">
+        <p>登録されていません<p>
+      </div>
+  <% else %>
+
+<!--カテゴリー別ジャンル一覧-->
+  <% category.genres.each do |genre| %>
+
+    <div class="row">
+        <div class="col-md-3 text-center">
+          <%= genre.name %>
+        </div>
+        <div class="col-md-3 text-center">
+          <%= link_to "編集", edit_admin_category_genre_path(category,genre.id) %>
+        </div>
+
+        <div class="col-md-3 text-center">
+          <%= link_to "削除", admin_category_genre_path(category,genre.id), method: :delete,
+          data: {confirm: "ジャンルを削除するとジャンルに登録されている投稿全てが削除されます。本当に削除しますか？"} %>
+        </div>
+      <%# end %>
+    </div>
+  <% end %>
+<% end %>
+<% end %>
+</div>
+

@@ -1,0 +1,2 @@
+module Member::ChatsHelper
+end

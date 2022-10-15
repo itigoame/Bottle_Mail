@@ -1,0 +1,73 @@
+<div class="main-heignt">
+  <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
+  <%= flash[:create_alret] %>
+  <%= form_with model: @post,url: posts_path,method: :post do |f| %>
+    <div class="row">
+      <div class="col-md-5 my-2 md-my-3 text-left text-md-right">タイトル</div>
+      <div class="col-md-4 my-2 md-my-3"><%= f.text_field :title %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 my-2 md-my-3 text-left text-md-right">本文</div>
+      <div class="col-md-4 my-2 md-my-3"><%= f.text_area :body %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 my-2 md-my-3 text-left text-md-right">カテゴリー選択</div>
+      <div class="col-md-4 my-2 md-my-3">
+        <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class=" col-md-5 my-2 md-my-3 text-left text-md-right ">ジャンル選択</div>
+      <div class="col-md-4 my-2 md-my-3 px-0">
+
+      <select class="d-none px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>
+    </div>
+      </div>
+    <div class="d-flex justify-content-center">
+      <div class="col-md-4 text-left text-md-right mt-2"><%= f.submit "投稿" %></div>
+    </div>
+  <% end %>
+</div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    // #post_category_idが変更されたら発動
+    $('#post_category_id').change(function() {
+      let category_id = $(this).val(); // 選択されている自分自身のvalueを取得する
+
+      // 「選択してください」のときの表示/非表示
+      if (category_id === '') {
+        $('#post_genre_id').removeClass('d-block').addClass('d-none');
+        return false; // ここで処理を止める
+      }
+
+      // '/get_genres'にcategory_idのGETパラメーターを付与してデータを取得する
+      $.ajax('/get_genres', {
+        type: 'get', // メソッド
+        data: { category_id: category_id }, // GETパラメーター
+        dataType: 'json' // データの形式
+      })
+      .done(function(genres) { // 成功
+        // もしgenresが無しの場合は、セレクトボックス非表示
+        if (genres.length === 0) {
+          $('#post_genre_id').removeClass('d-block').addClass('d-none');
+          return false; // ここで処理を止める
+        }
+        // class変更で表示/非表示
+        $('#post_genre_id').removeClass('d-none').addClass('d-block');
+        // 一旦セレクトボックスをリセット
+        $('#post_genre_id > option').remove();
+        genres.forEach(function(genre) { // ループ
+          // 取得したセレクトボックスデータを追加していく
+          $('#post_genre_id').append($('<option>').html(genre.name).val(genre.id));
+        })
+      })
+      .fail(function() { // 失敗
+        alert('取得に失敗しました。'); // アラートを出す
+      })
+    })
+  })
+</script>

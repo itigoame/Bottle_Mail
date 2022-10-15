@@ -1,0 +1,24 @@
+<div class="main-heignt">
+  <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
+    <%= form_with model: @member do |f| %>
+      <div class="row mb-3">
+        <div class="col-md-3">名前</div>
+        <div class="col-md-5"><%= f.text_field :name %></div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3">自己紹介</div>
+        <div class="col-md-5"><%= f.text_area :self_introduction %></div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3">画像</div>
+        <div class="col-md-5"><%= f.file_field :profile_image, accept: "image/*" %></div>
+      </div>
+      <div class="row mb-3 justify-content-end">
+        <div class="col-md-9"><%= f.submit "変更",class: "btn btn-sm btn-secondary" %></div>
+      </div>
+    <% end %>
+    <div>
+      <%= link_to "退会する", unsubscribe_path(@member.id) %>
+    </div>
+  </div>
+</div>
