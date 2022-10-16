@@ -5,7 +5,7 @@
   <div class="my-3">
     <%= form_with model: [:admin, @category, @genre] do |f| %>
       <%= f.text_field :name %>
-      <%= f.submit "追加" %>
+      <%= f.submit "追加",class: "btn btn-sm btn-secondary" %>
     <% end %>
   </div>
 
@@ -17,10 +17,10 @@
           <%= genre.name %>
           </td>
           <td width="20">
-            <%= link_to "編集", edit_admin_category_genre_path(@category,genre.id) %>
+            <%= link_to "編集", edit_admin_category_genre_path(@category,genre.id),class: "text-body"  %>
           </td>
           <td width="20">
-            <%= link_to "削除", admin_category_genre_path(@category,genre.id), method: :delete, data: {confirm: "ジャンルを削除するとジャンルに登録されている投稿全てが削除されます。本当に削除しますか？"} %>
+            <%= link_to "削除", admin_category_genre_path(@category,genre.id), method: :delete, data: {confirm: "ジャンルを削除するとジャンルに登録されている投稿全てが削除されます。本当に削除しますか？"},class: "text-danger"  %>
           </td>
         </tr>
       </tbody>

@@ -5,7 +5,7 @@ class Member::ChatsController < ApplicationController
   def corrent_check
     @room = Room.find(params[:room_id])
     @chat = current_member.chats.find_by(room_id: @room.id)
-    unless @chat.member.id = current_member.id
+    unless @chat.member.id == current_member.id
       redirect_to root_path
     end
   end

@@ -5,7 +5,7 @@ class Member::CommentsController < ApplicationController
   def corrent_check
     @post = Post.find(params[:post_id])
     @comment = current_member.comments.find_by(post_id: @post.id)
-    unless @comment.member.id = current_member.id
+    unless @comment.member.id == current_member.id
       redirect_to root_path
     end
   end

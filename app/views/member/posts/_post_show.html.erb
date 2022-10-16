@@ -26,7 +26,6 @@
         <%= render "member/empathies/empathy_link", post: post, empathies: empathies %>
       </span>
       <i class="fas fa-comment ml-3 text-secondary"></i><span class ="text-secondary"><%= comments.count %></span>
-      戻る
     </div>
   </div>
 
@@ -57,11 +56,11 @@
       <% elsif post.member == current_member %>
       <% post.is_closed? %>
         <% if post.is_closed %>
-          <%= link_to "トーク中にもどす", post_path(post.id, post: {is_closed: false}),method: :patch %>
+          <%= link_to "トーク中にもどす", post_path(post.id, post: {is_closed: false}),method: :patch,class: "text-body"  %>
         <% else %>
-          <%= link_to "トークを終了する", post_path(post.id, post: {is_closed: true}),method: :patch %>
+          <%= link_to "トークを終了する", post_path(post.id, post: {is_closed: true}),method: :patch,class: "text-body"  %>
         <% end %>
-        <%= link_to "削除", post_path(post.id), method: :delete,data: {confirm: "投稿を削除しますか？"} %>
+        <%= link_to "削除", post_path(post.id), method: :delete,data: {confirm: "投稿を削除しますか？"},class: "text-danger"  %>
       <% else %>
       <%= post.closed_check %>
       <% end %>

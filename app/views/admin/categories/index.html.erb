@@ -14,18 +14,18 @@
     <tbody>
       <tr>
       <td width="60">
-        <%= link_to admin_category_posts_path(category.id) do %>
+        <%= link_to admin_category_posts_path(category.id) ,class: "text-body" do %>
           <%= category.name %>
         <% end %>
       </td>
       <td width="5">
-        <%= link_to "編集", edit_admin_category_path(category.id) %>
+        <%= link_to "編集", edit_admin_category_path(category.id),class: "text-body"  %>
       </td>
       <td width="5">
-        <%= link_to "削除", admin_category_path(category.id),method: :delete, data: {confirm: "カテゴリーを削除するとカテゴリーに登録されているジャンル、投稿全てが削除されます。本当に削除しますか？"} %>
+        <%= link_to "削除", admin_category_path(category.id),method: :delete, data: {confirm: "カテゴリーを削除するとカテゴリーに登録されているジャンル、投稿全てが削除されます。本当に削除しますか？"} ,class: "text-danger"%>
       </td>
       <td width="30">
-        <%= link_to "ジャンル追加", admin_category_path(category.id) %>
+        <%= link_to "ジャンル追加", admin_category_path(category.id),class: "text-body"  %>
       </td>
     </tr>
     <tbody>
