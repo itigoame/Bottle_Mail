@@ -1,5 +1,5 @@
 class Member::EmpathiesController < ApplicationController
-
+  before_action :authenticate_member!
   def create
     @post = Post.find(params[:post_id])
     if !current_member.empathies.find_by(post_id: @post.id)

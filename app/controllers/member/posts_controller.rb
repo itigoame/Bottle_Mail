@@ -1,4 +1,14 @@
 class Member::PostsController < ApplicationController
+  before_action :authenticate_member!
+  before_action :corrent_check, only: [:update, :destroy]
+
+  def corrent_check
+    @post = Post.find(params[:id])
+    unless @post.member.id = current_member.id
+      redirect_to root_path
+    end
+  end
+
   def new
     @post = Post.new
     @categories = Category.all

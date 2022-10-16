@@ -1,4 +1,5 @@
 class Member::RelationshipsController < ApplicationController
+  before_action :authenticate_member!
 
   def create
     follower = Member.find(params[:member_id])

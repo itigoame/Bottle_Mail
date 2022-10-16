@@ -1,5 +1,5 @@
 class Admin::GenresController < ApplicationController
-
+  before_action :authenticate_admin!
   def create
     @category = Category.find(params[:category_id])
     @genre    = Genre.new(genre_params)
