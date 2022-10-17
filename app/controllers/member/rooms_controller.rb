@@ -1,4 +1,6 @@
 class Member::RoomsController < ApplicationController
+  before_action :authenticate_member!
+
   def create
     room = Room.create
     current_entry = Entry.create(member_id: current_member.id, room_id: room.id)

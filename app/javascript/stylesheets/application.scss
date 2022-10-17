@@ -22,6 +22,13 @@ img.logo-image {
 .form-design{
   height: 20vh;
 }
+.top-image {
+  background-image: url("../images/top.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  min-height: 300px;
+}
 
 @media screen and (max-width: 576px) {
   img.logo-image {

@@ -1,4 +1,13 @@
-<div class="container">
+<div class="container mt-3">
+<div class="row">
+  <div class="col-md-7 search_form">
+    <%= form_with url: admin_search_path, method: :get do |f| %>
+      <%= f.text_field :word %>
+      <%= f.select :range, options_for_select([['全て'],['男性'],['女性']]) %>
+      <%= f.submit "検索", class: "btn btn-sm" %>
+    <% end %>
+  </div>
+</div>
   <table class = "table mt-5">
     <thead>
       <tr>

@@ -61,10 +61,18 @@ class Member < ApplicationRecord
   # 検索
   def self.looks(word)
     if word
-      @user = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")
+      @member = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")
       # where('title LIKE ? OR body LIKE ?', "%#{keyword}%", "%#{keyword}%")
     else
-      @user = Member.all
+      @member = Member.all
+    end
+  end
+
+  def self.look(word)
+    if word
+      @member = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")
+    else
+      @member = Member.all
     end
   end
 end

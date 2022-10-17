@@ -1,6 +1,23 @@
 class Member::MembersController < ApplicationController
+  before_action :authenticate_member!
   before_action :no_member, only: [:create]
+  before_action :current_check, only: [:edit, :update, :unsubscribe, :withdrawal]
 
+  # 退会後ログイン防止
+  def no_member
+    @member = Member.find_by(email: params[:member][:email])
+    returm if !@member
+    if @member.valid_password?(params[:member][:password]) && !@member.is_active
+      redirect_to new_member_session_path
+    end
+  end
+
+  def current_check
+    @member = Member.find(params[:id])
+    unless @member.id == current_member.id
+      redirect_to root_path
+    end
+  end
 
   def show
     @member = Member.find(params[:id])
@@ -73,11 +90,4 @@ class Member::MembersController < ApplicationController
     params.require(:member).permit(:name, :profile_image, :self_introduction, :is_active)
   end
 
-  def no_member
-    @member = Member.find_by(email: params[:member][:email])
-    returm if !@member
-    if @member.valid_password?(params[:member][:password]) && !@member.is_active
-      redirect_to new_member_session_path
-    end
-  end
 end

@@ -1,13 +1,1 @@
-<div class="container">
-  <% @another_entries.each do |another_entry| %>
-  <%= link_to room_path(another_entry.room.id),class: "text-decoration-none" do %>
-    <div class="row bg-info my-3">
-        <div class="col-md-7 my-4 text-white">
-            <%= image_tag another_entry.member.get_profile_image(50,50) %>　<%= another_entry.member.name %>
-        </div>
-        <div class="col-md-7"></div>
-    </div>
-  <% end %>
-  <% end %>
-
-</div>
+<%= render "member/rooms/room_index",another_entries: @another_entries %>
