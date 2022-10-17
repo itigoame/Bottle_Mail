@@ -1,27 +1,27 @@
 <div class="main-heignt">
   <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
-  <%= flash[:create_alret] %>
   <%= form_with model: @post,url: posts_path,method: :post do |f| %>
+  <%= flash[:create_alret] %>
     <div class="row">
-      <div class="col-md-5 my-2 md-my-3 text-left text-md-right">タイトル</div>
+      <div class="col-md-6 my-2 md-my-3 text-left text-md-right">タイトル</div>
       <div class="col-md-4 my-2 md-my-3"><%= f.text_field :title %></div>
     </div>
     <div class="row">
-      <div class="col-md-5 my-2 md-my-3 text-left text-md-right">本文</div>
+      <div class="col-md-6 my-2 md-my-3 text-left text-md-right">本文</div>
       <div class="col-md-4 my-2 md-my-3"><%= f.text_area :body %></div>
     </div>
     <div class="row">
-      <div class="col-md-5 my-2 md-my-3 text-left text-md-right">カテゴリー選択</div>
+      <div class="col-md-6 my-2 md-my-3 text-left text-md-right">カテゴリー選択</div>
       <div class="col-md-4 my-2 md-my-3">
         <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
       </div>
     </div>
 
-    <div class="row">
-      <div class=" col-md-5 my-2 md-my-3 text-left text-md-right ">ジャンル選択</div>
+    <div class="row d-none" id="genre_form">
+      <div class=" col-md-6 my-2 md-my-3 text-left text-md-right">ジャンル選択</div>
       <div class="col-md-4 my-2 md-my-3 px-0">
 
-      <select class="d-none px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>
+      <select class="px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>
     </div>
       </div>
     <div class="d-flex justify-content-center">
@@ -39,10 +39,11 @@
       let category_id = $(this).val(); // 選択されている自分自身のvalueを取得する
 
       // 「選択してください」のときの表示/非表示
-      if (category_id === '') {
-        $('#post_genre_id').removeClass('d-block').addClass('d-none');
-        return false; // ここで処理を止める
-      }
+      // if (category_id === '') {
+      //   let id = "genre_title"
+      //   $('#genre_form').removeClass('d-block').addClass('d-none');
+      //   return false; // ここで処理を止める
+      // }
 
       // '/get_genres'にcategory_idのGETパラメーターを付与してデータを取得する
       $.ajax('/get_genres', {
@@ -52,12 +53,14 @@
       })
       .done(function(genres) { // 成功
         // もしgenresが無しの場合は、セレクトボックス非表示
+        console.log(genres);
         if (genres.length === 0) {
-          $('#post_genre_id').removeClass('d-block').addClass('d-none');
+          $('#genre_form').removeClass('d-block').addClass('d-none');
+
           return false; // ここで処理を止める
         }
         // class変更で表示/非表示
-        $('#post_genre_id').removeClass('d-none').addClass('d-block');
+        $('#genre_form').removeClass('d-none').addClass('d-block');
         // 一旦セレクトボックスをリセット
         $('#post_genre_id > option').remove();
         genres.forEach(function(genre) { // ループ

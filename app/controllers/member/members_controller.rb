@@ -59,6 +59,7 @@ class Member::MembersController < ApplicationController
     if @member.update(member_params)
       redirect_to member_path(@member.id)
     else
+      flash[:create_alret] = "更新に失敗しました。もう一度お試しください"
       render :edit
     end
   end

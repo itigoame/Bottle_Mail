@@ -17,7 +17,7 @@ class Member::CommentsController < ApplicationController
       if comment.save
         redirect_back(fallback_location: root_url)
       else
-        flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
+        flash[:comment_create_alret] = "投稿に失敗しました。もう一度お試しください"
         @post      = Post.find(params[:post_id])
         @member    = @post.member
         @empathies = @post.empathies

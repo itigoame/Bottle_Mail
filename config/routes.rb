@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :members,       only: [:show,   :edit, :index, :update] do
       resources :rooms,       only: [:show,   :index] do
-        resources :chats,     only: :destroy
       end
     end
+    resources :chats,     only: :destroy
     resources :categories,    only: [:create, :index, :edit, :update, :destroy, :show] do
       resources :genres,      only: [:create, :index, :edit, :update, :destroy]
       resources :posts,       only:  :index

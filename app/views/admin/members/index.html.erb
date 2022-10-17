@@ -1,55 +1,45 @@
 <div class="container mt-3">
-<div class="row">
-  <div class="col-md-7 search_form">
-    <%= form_with url: admin_search_path, method: :get do |f| %>
-      <%= f.text_field :word %>
-      <%= f.select :range, options_for_select([['全て'],['男性'],['女性']]) %>
-      <%= f.submit "検索", class: "btn btn-sm" %>
+<!--<div class="row">-->
+  <!--<div class="col-md-7 search_form">-->
+    <%= form_with url: admin_search_path, method: :get, class: "" do |f| %>
+        <div class="form-group row">
+          <div class="col-sm-4 my-1">
+            <%= f.text_field :word, class: "form-control" %>
+          </div>
+          <div class="col-sm-3 my-1">
+            <%= f.select :range, options_for_select([['全て'],['男性'],['女性']], params[:range]), {}, {class: "form-control"} %>
+          </div>
+          <div class="col-sm-2 my-1">
+            <%= f.submit "検索", class: "btn btn-secondary btn-block" %>
+          </div>
+        </div>
     <% end %>
+  <!--</div>-->
+<!--</div>-->
+
+  <div class="row mt-4 p-2 border-bottom">
+    <div class="col-md-5"><strong>name</strong></div>
+    <div class="col-md-3"><strong>gender</strong></div>
+    <div class="col-md-3"><strong>status</strong></div>
   </div>
-</div>
-  <table class = "table mt-5">
-    <thead>
-      <tr>
-        <th>
-          name
-        </th>
-        <th>
-          gender
-        </th>
-        <th>
-          status
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @members.each do |member| %>
-      <% if member.is_active == false %>
-        <tr class = "text-info">
-          <td>
-            <%= link_to member.name,admin_member_path(member.id),class: "text-info" %>
-          </td>
-          <td>
-            <%= member.gender_i18n %>
-          </td>
-          <td>
-            <%= member.status_display %>
-          </td>
-        </tr>
-      <% else %>
-        <tr>
-          <td>
-            <%= link_to member.name,admin_member_path(member.id),class: "text-body" %>
-          </td>
-          <td>
-            <%= member.gender_i18n %>
-          </td>
-          <td>
-            <%= member.status_display %>
-          </td>
-        </tr>
-      <% end %>
-      <% end %>
-    </tbody>
-  </table>
+  <% @members.each do |member| %>
+    <% if member.is_active == false %>
+
+      <div class="row p-2 text-info border-bottom">
+        <div class="col-md-5"><%= link_to member.name,admin_member_path(member.id),class: "text-info text-break" %></div>
+        <div class="col-md-3"><%= member.gender_i18n %></div>
+        <div class="col-md-3"><%= member.status_display %></div>
+      </div>
+
+    <% else %>
+      <div class="row p-2 border-bottom">
+        <div class="col-md-5"><%= link_to member.name,admin_member_path(member.id),class: "text-body" %></div>
+        <div class="col-md-3"><%= member.gender_i18n %></div>
+        <div class="col-md-3"><%= member.status_display %></div>
+      </div>
+
+
+    <% end %>
+  <% end %>
+
 </div>

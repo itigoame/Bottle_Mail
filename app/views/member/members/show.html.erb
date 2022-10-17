@@ -1,25 +1,18 @@
 <div class="container py-2 border-bottom">
-<div class="row flex-nowrap">
-  <div class="col-md-4">
-    <div class="row flex-nowrap">
-      <div class="col-md-4 text-center small">
-        <%= link_to member_followings_path(@member.id),class: "text-body" do %>
-          <%= @following_members.count %><br>
-          フォロワー
-        <% end %>
-      </div>
-      <div class="col-md-4 text-center small">
-        <%= link_to member_followers_path(@member.id) ,class: "text-body" do %>
-          <%= @follower_members.count %><br>
-          フォロー
-        <% end %>
-      </div>
-
-
-
-    </div>
+<div class="d-flex">
+  <div class="text-center small px-0">
+    <%= link_to member_followings_path(@member.id),class: "text-body mx-3", style: "display:block;" do %>
+      <div><%= @following_members.count %></div>
+      <div>フォロワー</div>
+    <% end %>
   </div>
-  <div class="d-flex justify-content-end col-md-8 text-right">
+  <div class="text-center small px-0">
+    <%= link_to member_followers_path(@member.id) ,class: "text-body mx-3",style: "display:block;" do %>
+      <div><%= @follower_members.count %></div>
+      <div>フォロー</div>
+    <% end %>
+  </div>
+  <div class="ml-auto">
     <!--本人のみプロフィール編集とDM一覧表示-->
     <% if @member == current_member %>
 
@@ -58,12 +51,12 @@
   </div>
 </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-6 col-md-3">
       <%= image_tag @member.get_profile_image(100, 100) %>
     </div>
-    <div class="col-md-5 align-self-center">
-      <div class="row mb-3"><%= @member.name %></div>
-      <div class="row"><%= simple_format(@member.self_introduction) %></div>
+    <div class="col-sm-6 col-md-5 px-15 align-self-center">
+        <div class="mb-3"><%= @member.name %></div>
+        <div class=""><%= simple_format(@member.self_introduction) %></div>
     </div>
   </div>
 </div>

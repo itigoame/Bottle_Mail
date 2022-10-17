@@ -1,7 +1,9 @@
 <div class="main-heignt">
+  <!--画面中央に表示-->
   <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
+    <%= flash[:create_alret] %>
     <%= form_with model: @member do |f| %>
-      <div class="row mb-3">
+      <div class="row my-3">
         <div class="col-md-3">名前</div>
         <div class="col-md-5"><%= f.text_field :name %></div>
       </div>

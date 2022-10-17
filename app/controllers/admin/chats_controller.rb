@@ -2,10 +2,8 @@ class Admin::ChatsController < ApplicationController
   before_action :authenticate_admin!
 
   def destroy
-    room = Room.find(params[:room_id])
-    chat = Chat.find_by(room_id: room.id)
-    member_id = chat.member.id
-    chat.destroy
+    chat = Chat.find_by(id: params[:id])
+    chat.destroy if chat
     redirect_back(fallback_location: root_url)
   end
 

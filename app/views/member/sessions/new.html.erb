@@ -1,5 +1,7 @@
 <div class="main-heignt">
   <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="text-success"><h5><%=flash[:notice] %></h5></div>
+    <div class="text-danger"><h5><%=flash[:alert] %></h5></div>
   <h2>Log in</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field mb-1">
