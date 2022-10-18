@@ -2,33 +2,25 @@
 <h4>カテゴリー一覧</h4>
 
 <%= flash[:creat_alret] %>
-<div class="my-3">
   <%= form_with model: @category, url: admin_categories_path do |f| %>
-    <%= f.text_field :name %>
-    <%= f.submit "追加",class: "btn btn-sm btn-secondary" %>
+    <div class="form_group row mb-5">
+      <div class="col-sm-4 my-1">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="col-sm-2 my-1">
+         <%= f.submit "追加", class: "btn btn-block btn-secondary" %>
+      </div>
+    </div>
   <% end %>
-</div>
 
 <% @categories.each do |category| %>
-  <table class= "table my-auto">
-    <tbody>
-      <tr>
-      <td width="60">
-        <%= link_to admin_category_posts_path(category.id) ,class: "text-body" do %>
-          <%= category.name %>
-        <% end %>
-      </td>
-      <td width="5">
-        <%= link_to "編集", edit_admin_category_path(category.id),class: "text-body"  %>
-      </td>
-      <td width="5">
-        <%= link_to "削除", admin_category_path(category.id),method: :delete, data: {confirm: "カテゴリーを削除するとカテゴリーに登録されているジャンル、投稿全てが削除されます。本当に削除しますか？"} ,class: "text-danger"%>
-      </td>
-      <td width="30">
-        <%= link_to "ジャンル追加", admin_category_path(category.id),class: "text-body"  %>
-      </td>
-    </tr>
-    <tbody>
-  </table>
+  <div class="d-flex border-bottom py-2">
+    <%= link_to admin_category_posts_path(category.id) ,class: "text-body col-sm-4" do %>
+      <%= category.name %>
+    <% end %>
+    <%= link_to "編集", edit_admin_category_path(category.id),class: "text-body col-sm-2" %>
+    <%= link_to "削除", admin_category_path(category.id),method: :delete, data: {confirm: "カテゴリーを削除するとカテゴリーに登録されているジャンル、投稿全てが削除されます。本当に削除しますか？"} ,class: "text-danger col-sm-2"%>
+    <%= link_to "ジャンル追加", admin_category_path(category.id),class: "text-body col-sm-4"  %>
+  </div>
 <% end %>
 </div>
