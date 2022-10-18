@@ -1,4 +1,5 @@
 <div class="container mt-5 px-5 d-flex flex-column align-items-center justify-content-center">
+  <%= flash[:edit_alret] %>
   <%= form_with model: @member,url: admin_member_path do |f| %>
     <div class="row mb-3 mt-5">
       <div class="col-md-4">名前</div>

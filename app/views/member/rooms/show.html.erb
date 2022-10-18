@@ -4,22 +4,20 @@
   <% if @chats.present? %>
     <% @chats.each do |chat| %>
       <% if chat.member.id == current_member.id %>
-        <div class="d-flex justify-content-end col-md-11 text-right my-3">
-          <div class="col-md-5">
-            <%= chat.message %>
-            <%= link_to room_chat_path(@room.id,chat.id),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
-            <i class="far fa-trash-alt"></i>
-            <% end %>
+        <div class="d-flex row justify-content-end text-right mb-3">
+          <div class="col-md-11 col-sm-11 text-break">
+            <%= simple_format(chat.message) %>
+          </div>
+          <%= link_to room_chat_path(@room.id,chat.id),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
+            <div class="col-md-1 col-sm-1">
+              <i class="far fa-trash-alt"></i>
             </div>
+          <% end %>
         </div>
       <% else %>
-        <div class="row col-md-11 my-3">
-          <div class="col-md-5">
-            <div class="row">
-              <div class="col-md-12"><%= image_tag chat.member.get_profile_image(30,30) %><%= chat.member.name %></div>
-              <div class="col-md-12"><%= simple_format(chat.message） %></div>
-            </div>
-          </div>
+        <div class="row my-2">
+          <div class="col-md-12"><%= image_tag chat.member.get_profile_image(30,30) %><%= chat.member.name %></div>
+          <div class="col-md-12 com-sm-12 text-break"><%= simple_format(chat.message) %></div>
         </div>
       <% end %>
     <% end %>

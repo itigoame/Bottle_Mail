@@ -58,7 +58,7 @@ class Member < ApplicationRecord
     follower_members.include?(member)
   end
 
-  # 検索
+  # member側検索
   def self.looks(word)
     if word
       @member = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")
@@ -68,6 +68,7 @@ class Member < ApplicationRecord
     end
   end
 
+  # admin側検索(表示させるページが異なるため分ける)
   def self.look(word)
     if word
       @member = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")

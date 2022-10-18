@@ -5,26 +5,26 @@
     <% @chats.each do |chat| %>
     <!--投稿しているユーザーによってコメントの表示場所を変える-->
       <% if admin_signed_in? && (chat.member.id == @member.id) %>
-        <div class="row d-flex justify-content-end text-right my-3">
-          <div class="col-md-5">
+        <div class="d-flex row justify-content-end text-right mb-3">
+          <div class="col-md-8 text-break">
             <%= simple_format(chat.message) %>
-            <%= link_to admin_chat_path(chat),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
-            <i class="far fa-trash-alt"></i>
-            <% end %>
+          </div>
+          <%= link_to admin_chat_path(chat),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
+            <div class="col-md-1">
+              <i class="far fa-trash-alt"></i>
             </div>
+          <% end %>
         </div>
       <% elsif admin_signed_in? && (chat.member.id != @member.id) %>
-        <div class="row col-md-11 my-3">
-          <div class="col-md-5">
-            <div class="row">
-              <div class="col-md-12"><%= image_tag @partner.member.get_profile_image(30,30) %><%= @partner.member.name %></div>
-              <div class="col-md-12">
-                  <%= simple_format(chat.message) %>
-                  <%= link_to admin_chat_path(chat),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
-                    <i class="far fa-trash-alt"></i>
-                  <% end %>
-              </div>
-            </div>
+        <div class="row d-flex">
+          <div><%= image_tag @partner.member.get_profile_image(30,30) %><%= @partner.member.name %></div>
+          <%= link_to admin_chat_path(chat),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
+              <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+        <div class="row d-flex mb-3">
+          <div class="col-md-8 col-sm-8 d-flex align-items-center text-break">
+            <%= simple_format(chat.message) %>
           </div>
         </div>
       <% end %>
