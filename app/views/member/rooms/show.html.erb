@@ -4,18 +4,18 @@
   <% if @chats.present? %>
     <% @chats.each do |chat| %>
       <% if chat.member.id == current_member.id %>
-        <div class="d-flex row justify-content-end text-right mb-3">
-          <div class="col-md-11 col-sm-11 text-break">
-            <%= simple_format(chat.message) %>
+        <div class="d-flex flex-nowrap align-items-center justify-content-end text-right mb-3">
+          <div class="col-md-11 col-sm-11 px-0 text-break">
+            <%= simple_format(chat.message, {}, wrapper_tag: "div") %>
           </div>
           <%= link_to room_chat_path(@room.id,chat.id),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
-            <div class="col-md-1 col-sm-1">
+            <div class="col-md-1 col-sm-1 px-0">
               <i class="far fa-trash-alt"></i>
             </div>
           <% end %>
         </div>
       <% else %>
-        <div class="row my-2">
+        <div class="my-2">
           <div class="col-md-12"><%= image_tag chat.member.get_profile_image(30,30) %><%= chat.member.name %></div>
           <div class="col-md-12 com-sm-12 text-break"><%= simple_format(chat.message) %></div>
         </div>
@@ -33,7 +33,7 @@
         <%= f.hidden_field :room_id, value: @room.id %>
       </div>
       <div class="d-flex col-md-1 align-items-center">
-        <%= f.submit "送信",class: "btn btn-sm btn-outline-dark" %>
+        <%= f.submit "送信",class: "btn btn-sm btn-secondary" %>
       </div>
     </div>
   <% end %>

@@ -21,8 +21,8 @@
       <div class=" col-md-6 my-2 md-my-3 text-left text-md-right">ジャンル選択</div>
       <div class="col-md-4 my-2 md-my-3 px-0">
 
-      <select class="px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>
-    </div>
+        <select class="px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>
+      </div>
       </div>
     <div class="d-flex justify-content-center">
       <div class="col-md-4 text-left text-md-right mt-2"><%= f.submit "投稿" %></div>
@@ -54,12 +54,12 @@
         // もしgenresが無しの場合は、セレクトボックス非表示
         console.log(genres);
         if (genres.length === 0) {
-          $('#genre_form').removeClass('d-block').addClass('d-none');
+          $('#genre_form').removeClass('d-flex').addClass('d-none');
 
           return false; // ここで処理を止める
         }
         // class変更で表示/非表示
-        $('#genre_form').removeClass('d-none').addClass('d-block');
+        $('#genre_form').removeClass('d-none').addClass('d-flex');
         // 一旦セレクトボックスをリセット
         $('#post_genre_id > option').remove();
         genres.forEach(function(genre) { // ループ
