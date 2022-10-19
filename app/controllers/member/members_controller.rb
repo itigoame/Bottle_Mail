@@ -1,13 +1,13 @@
 class Member::MembersController < ApplicationController
   before_action :authenticate_member!
-  before_action :no_member, only: [:create]
+  before_action :no_member,     only: [:create]
   before_action :current_check, only: [:edit, :update, :unsubscribe, :withdrawal]
 
   # 退会後ログイン防止
   def no_member
     @member = Member.find_by(email: params[:member][:email])
     returm if !@member
-    if @member.valid_password?(params[:member][:password]) && !@member.is_active
+    if @member.valid_password?     (params[:member][:password]) && !@member.is_active
       redirect_to new_member_session_path
     end
   end
@@ -20,11 +20,11 @@ class Member::MembersController < ApplicationController
   end
 
   def show
-    @member = Member.find(params[:id])
+    @member                  = Member.find(params[:id])
     if current_member.gender == @member.gender
-      @following_members = @member.following_members
-      @follower_members  = @member.follower_members
-      @posts = @member.posts
+      @following_members     = @member.following_members
+      @follower_members      = @member.follower_members
+      @posts                 = @member.posts
 
       # チャット機能
       @current_entry = Entry.where(member_id: current_member.id)
@@ -76,12 +76,12 @@ class Member::MembersController < ApplicationController
   end
 
   def followings
-    @member = Member.find(params[:member_id])
+    @member  = Member.find(params[:member_id])
     @members = @member.following_members
   end
 
   def followers
-    @member = Member.find(params[:member_id])
+    @member  = Member.find(params[:member_id])
     @members = @member.follower_members
   end
 

@@ -1,5 +1,5 @@
 
-  <div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
+<div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
   <%= form_with model: @post,url: posts_path,method: :post do |f| %>
   <%= flash[:create_alret] %>
     <div class="row">
@@ -16,16 +16,17 @@
         <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
       </div>
     </div>
-
+    <!--カテゴリーに対するジャンルが存在する場合のみ表示-->
     <div class="row d-none" id="genre_form">
       <div class=" col-md-6 my-2 md-my-3 text-left text-md-right">ジャンル選択</div>
       <div class="col-md-4 my-2 md-my-3 px-0">
-
         <select class="px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>
       </div>
+    </div>
+    <div class="row d-flex justify-content-end">
+      <div class="col-md-6">
+        <%= f.submit "投稿",class: "btn btn-sm btn-secondary" %>
       </div>
-    <div class="d-flex justify-content-center">
-      <div class="col-md-4 text-left text-md-right mt-2"><%= f.submit "投稿" %></div>
     </div>
   <% end %>
 </div>

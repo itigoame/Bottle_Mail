@@ -2,10 +2,10 @@ class Admin::MembersController < ApplicationController
     before_action :authenticate_admin!
 
   def show
-    @member = Member.find(params[:id])
+    @member            = Member.find(params[:id])
     @following_members = @member.following_members
-    @follower_members =  @member.follower_members
-    @posts = @member.posts
+    @follower_members  = @member.follower_members
+    @posts             = @member.posts
   end
 
   def index

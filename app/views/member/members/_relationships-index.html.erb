@@ -1,20 +1,24 @@
 <% members.each do |member| %>
-  <div class="row d-flex ml-5">
+  <div class="row d-flex ml-5 my-4 py-1 shadow">
+
     <%= link_to member_path(member.id),class: "col-md-2 text-body" do %>
       <%= image_tag member.get_profile_image(50,50) %>
     <% end %>
+
     <%= link_to member_path(member.id),class: "row col-6 text-body" do %>
       <div class="col-md-12"><%= member.name %></div>
       <div class="col-md-12"><%= member.self_introduction %></div>
     <% end %>
+
     <div class="col-md-2 md-ml-5 small">
       <% unless member == current_member %>
         <% if current_member.following?(member) %>
           <%= link_to "フォローをやめる",relationships_path(member_id: member.id), method: :delete,class: "text-body" %>
         <% else %>
-          <%= link_to "フォローする",relationships_path(member_id: member.id), method: :post,class: "text-body" %>
+          <%= link_to "フォローする",    relationships_path(member_id: member.id), method: :post,  class: "text-body" %>
         <% end %>
       <% end %>
     </div>
+
   </div>
-  <% end %>
+<% end %>

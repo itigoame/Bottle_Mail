@@ -1,17 +1,17 @@
 class Admin::PostsController < ApplicationController
     before_action :authenticate_admin!
   def show
-    @post = Post.find(params[:id])
-    @member = @post.member
+    @post      = Post.find(params[:id])
+    @member    = @post.member
     @empathies = @post.empathies
-    @comment = Comment.new
-    @comments = @post.comments
+    @comment   = Comment.new
+    @comments  = @post.comments
   end
 
   def index
     @category = Category.find(params[:category_id])
-    @posts = @category.posts.order(created_at: "DESC")
-    @genres = @category.genres
+    @posts    = @category.posts.order(created_at: "DESC")
+    @genres   = @category.genres
   end
 
   def destroy

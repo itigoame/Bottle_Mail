@@ -1,7 +1,7 @@
 <div class="container mt-3">
-<h4><%= @category.name %></h4>
-
+  <h4><%= @category.name %></h4>
   <%= flash[:create_alret] %>
+
     <%= form_with model: [:admin, @category, @genre] do |f| %>
       <div class="form_group row my-3">
         <div class="col-sm-5 my-1">
@@ -13,12 +13,14 @@
       </div>
     <% end %>
 
-  <% @genres.each do |genre| %>
-    <div class="d-flex border-bottom flex-nowrap py-2">
-      <div class="col-sm-3"><%= genre.name %></div>
-      <%= link_to "編集", edit_admin_category_genre_path(@category,genre.id),class: "text-body col-sm-2" %>
-      <%= link_to "削除", admin_category_genre_path(@category,genre.id), method: :delete, data: {confirm: "ジャンルを削除するとジャンルに登録されている投稿全てが削除されます。本当に削除しますか？"},class: "text-danger col-sm-2"%>
-    </div>
-  <% end %>
+    <% @genres.each do |genre| %>
+      <div class="d-flex border-bottom flex-nowrap py-2">
+        <div class="col-sm-3">
+          <%= genre.name %>
+        </div>
+        <%= link_to "編集", edit_admin_category_genre_path(@category,genre.id),class: "text-body col-sm-2" %>
+        <%= link_to "削除", admin_category_genre_path(@category,genre.id), method: :delete, data: {confirm: "ジャンルを削除するとジャンルに登録されている投稿全てが削除されます。本当に削除しますか？"},class: "text-danger col-sm-2"%>
+      </div>
+    <% end %>
 
 </div>

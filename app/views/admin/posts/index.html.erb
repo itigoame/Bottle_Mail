@@ -1,5 +1,6 @@
 <div class="container mt-3">
   <%= render "searches/search-form" %>
+
   <%= form_with url: search_path, method: :get do |f| %>
     <div class="form-group row">
       <div class="col-sm-4 my-1">
@@ -44,17 +45,16 @@
           <span id="empathy_counts<%= post.id %>" >
             <%= render "member/empathies/empathy_link", post: post, empathies: @empathies %>
           </span>
+          <!--いいねボタン-->
             <i class="fas fa-comment text-white  ml-3"></i>
             <span class = "text-secondary">
               <%= post.comments.count %>
             </span>
         </div>
-
         <div class="col-md-6 text-right">
           <%= post.closed_check %>
         </div>
       </div>
-
     </div>
   <% end %>
 

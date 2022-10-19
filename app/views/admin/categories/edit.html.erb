@@ -1,18 +1,19 @@
 <div class="container mt-5">
-<%= flash[:edit_alret] %>
-<h4>カテゴリー編集: <%= @category.name %></h4>
+  <%= flash[:edit_alret] %>
+  <h4>カテゴリー編集: <%= @category.name %></h4>
 
-<%= form_with model: @category, url: admin_category_path(@category.id) do |f| %>
-  <div class="form-group row mt-3">
-    <div class="col-sm-2 my-1">
-      <%= f.label :name, "名前" %>
+  <%= form_with model: @category, url: admin_category_path(@category.id) do |f| %>
+    <div class="form-group row mt-3">
+      <div class="col-sm-2 my-1">
+        <%= f.label :name, "名前" %>
+      </div>
+      <div class="col-sm-4 my-1">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="col-sm-2 my-1">
+        <%= f.submit "追加",    class: "btn btn-secondary btn-block" %>
+      </div>
     </div>
-    <div class="col-sm-4 my-1">
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <div class="col-sm-2 my-1">
-      <%= f.submit "追加", class: "btn btn-secondary btn-block" %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+
 </div>

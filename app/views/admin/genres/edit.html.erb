@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <%= flash[:edit_alret] %>
-    <h4 class ="mb-3">カテゴリー: <%= @category.name %><br>
-        ジャンル: <%= @genre.name %></h4>
+  <h4 class ="mb-3">カテゴリー: <%= @category.name %><br>
+                    ジャンル:   <%= @genre.name %></h4>
 
   <%= form_with model: @genre, url: admin_category_genre_path(@genre.id) do |f| %>
     <div class="form-group row mt-3">
@@ -12,8 +12,9 @@
         <%= f.text_field :name, class: "form-control" %>
       </div>
       <div class="col-sm-2 my-1">
-        <%= f.submit "追加", class: "btn btn-secondary btn-block" %>
+        <%= f.submit "追加",    class: "btn btn-secondary btn-block" %>
       </div>
     </div>
   <% end %>
+
 </div>

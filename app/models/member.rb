@@ -31,12 +31,12 @@ class Member < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :comments, dependent: :destroy
+  has_many :comments,  dependent: :destroy
   has_many :empathies, dependent: :destroy
-  has_many :posts,    dependent: :destroy
-  has_many :entries,  dependent: :destroy
-  has_many :chats,    dependent: :destroy
-  has_many :rooms,    dependent: :destroy
+  has_many :posts,     dependent: :destroy
+  has_many :entries,   dependent: :destroy
+  has_many :chats,     dependent: :destroy
+  has_many :rooms,     dependent: :destroy
 
   #フォロー機能
   has_many :followers,        class_name: "Relationship",foreign_key: :follower_id, dependent: :destroy
