@@ -26,7 +26,6 @@ class Admin::GenresController < ApplicationController
 
   def update
     @genre = Genre.find(params[:id])
-    @category = Category.find(params[:category_id])
 
     if @genre.update(genre_params)
       redirect_to admin_category_path(@genre.category_id)
