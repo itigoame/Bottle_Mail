@@ -2,10 +2,10 @@ class Admin::MembersController < ApplicationController
     before_action :authenticate_admin!
 
   def show
-    @member = Member.find(params[:id])
+    @member            = Member.find(params[:id])
     @following_members = @member.following_members
-    @follower_members =  @member.follower_members
-    @posts = @member.posts
+    @follower_members  = @member.follower_members
+    @posts             = @member.posts
   end
 
   def index
@@ -21,6 +21,7 @@ class Admin::MembersController < ApplicationController
     if @member.update(member_params)
       redirect_to admin_member_path(@member.id)
     else
+      flash[:edit_alret] = "編集に失敗しました。もう一度お試しください"
       render :edit
     end
   end

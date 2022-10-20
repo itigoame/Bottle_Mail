@@ -2,11 +2,11 @@ class Admin::RoomsController < ApplicationController
   before_action :authenticate_admin!
 
   def show
-    @room = Room.find(params[:id])
-    @member = Member.find(params[:member_id])
-    @chats = @room.chats
+    @room     = Room  .find(params[:id])
+    @member   = Member.find(params[:member_id])
+    @chats    = @room.chats
     @entries  = @room.entries
-    @partner = @entries.where.not(member_id: @member.id).first
+    @partner  = @entries.where.not(member_id: @member.id).first
   end
 
   def index

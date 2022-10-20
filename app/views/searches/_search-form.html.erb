@@ -1,9 +1,13 @@
-<div class="row">
-  <div class="col-md-7 search_form">
-    <%= form_with url: search_path, method: :get do |f| %>
-      <%= f.text_field :word %>
-      <%= f.select :range, options_for_select([["Member"],["Post"]]) %>
-      <%= f.submit "検索", class: "btn btn-sm" %>
-    <% end %>
+<%= form_with url: search_path, method: :get do |f| %>
+  <div class="form-group row">
+    <div class="col-sm-4 my-1">
+      <%= f.text_field :word, class: "form-control" %>
+    </div>
+    <div class="col-sm-3 my-1">
+      <%= f.select :range, options_for_select([["Member"],["Post"]], params[:range]), {}, {class: "form-control"} %>
+    </div>
+    <div class="col-sm-2 my-1">
+      <%= f.submit "検索", class: "btn btn-secondary btn-block" %>
+    </div>
   </div>
-</div>
+<% end %>

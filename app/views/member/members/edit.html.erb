@@ -1,24 +1,25 @@
-<div class="main-heignt">
-  <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
-    <%= form_with model: @member do |f| %>
-      <div class="row mb-3">
-        <div class="col-md-3">名前</div>
-        <div class="col-md-5"><%= f.text_field :name %></div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-3">自己紹介</div>
-        <div class="col-md-5"><%= f.text_area :self_introduction %></div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-3">画像</div>
-        <div class="col-md-5"><%= f.file_field :profile_image, accept: "image/*" %></div>
-      </div>
-      <div class="row mb-3 justify-content-end">
-        <div class="col-md-9"><%= f.submit "変更",class: "btn btn-sm btn-secondary" %></div>
-      </div>
-    <% end %>
-    <div>
-      <%= link_to "退会する", unsubscribe_path(@member.id) %>
+<div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
+  <%= flash[:create_alret] %>
+
+  <%= form_with model: @member do |f| %>
+    <div class="row my-3 form-group">
+      <div class="col-md-3 com-sm-12">名前</div>
+      <div class="col-md-8 com-sm-12"><%= f.text_field :name,class: "form-control" %></div>
     </div>
+    <div class="row mb-3 form-group">
+      <div class="col-md-3 com-sm-12">自己紹介</div>
+      <div class="col-md-8 com-sm-12"><%= f.text_area :self_introduction,class: "form-control" %></div>
+    </div>
+    <div class="row mb-3 form-group">
+      <div class="col-md-3 com-sm-12">画像</div>
+      <div class="col-md-8 com-sm-12"><%= f.file_field :profile_image, accept: "image/*" %></div>
+    </div>
+    <div class="row mb-3 justify-content-end">
+      <div class="col-md-9 com-sm-12"><%= f.submit "変更",class: "btn btn-sm btn-secondary" %></div>
+    </div>
+  <% end %>
+
+  <div>
+    <%= link_to "退会する", unsubscribe_path(@member.id) %>
   </div>
 </div>

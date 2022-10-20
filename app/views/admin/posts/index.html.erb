@@ -1,13 +1,20 @@
 <div class="container mt-3">
   <%= render "searches/search-form" %>
-<div class="row">
-  <div class="col-md-7 search_form">
-    <%= form_with url: search_path, method: :get do |f| %>
-      <%= f.collection_select :genre_id, @genres, :id, :name ,include_blank: "選択してください"%>
-      <%= f.submit "検索", class: "btn btn-sm" %>
-    <% end %>
-  </div>
-</div>
+
+  <%= form_with url: search_path, method: :get do |f| %>
+    <div class="form-group row">
+      <div class="col-sm-4 my-1">
+        <%= f.text_field :word, class: "form-control" %>
+      </div>
+      <div class="col-sm-3 my-1">
+        <%= f.collection_select :genre_id, @genres, :id, :name ,{}, {class: "form-control"} %>
+      </div>
+      <div class="col-sm-2 my-1">
+        <%= f.submit "検索", class: "btn btn-block btn-secondary" %>
+      </div>
+    </div>
+  <% end %>
+
   <% @posts.each do |post| %>
     <div class="bg-info mb-2">
       <%= link_to admin_post_path(post.id) do %>
@@ -38,17 +45,16 @@
           <span id="empathy_counts<%= post.id %>" >
             <%= render "member/empathies/empathy_link", post: post, empathies: @empathies %>
           </span>
+          <!--いいねボタン-->
             <i class="fas fa-comment text-white  ml-3"></i>
             <span class = "text-secondary">
               <%= post.comments.count %>
             </span>
         </div>
-
         <div class="col-md-6 text-right">
           <%= post.closed_check %>
         </div>
       </div>
-
     </div>
   <% end %>
 
