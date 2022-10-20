@@ -31,7 +31,7 @@ class Member::CommentsController < ApplicationController
     post    = Post.find(params[:post_id])
     comment = current_member.comments.find_by(post_id: post.id)
     comment.destroy
-    redirect_back(fallback_location: root_url)
+    redirect_to admin_post_path(post)
   end
 
   private
