@@ -32,6 +32,8 @@ class Admin::GenresController < ApplicationController
       redirect_to admin_category_path(@genre.category_id)
     else
       flash[:edit_alret] = "編集に失敗しました。もう一度お試しください"
+      @genre    = Genre.find(params[:id])
+      @category = Category.find(params[:category_id])
       render :edit
     end
 
