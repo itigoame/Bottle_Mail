@@ -9,15 +9,44 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <% if member_signed_in? %>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><%= link_to "マイページ", member_path(current_member.id),               class: "mx-3 text-white" %></li>
-        <li class="nav-item"><%= link_to "コミュニティへ", categories_path,                          class: "mx-3 text-white" %></li>
-        <li class="nav-item"><%= link_to "新規投稿", new_post_path,                                  class: "mx-3 text-white" %></li>
-        <li class="nav-item"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "mx-3 text-white" %></li>
+
+        <li class="nav-item">
+          <%= link_to member_path(current_member.id) do %>
+            <i class="fas fa-door-open text-white mr-1"></i><span class = "mr-3 text-white">My page</span>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to categories_path do %>
+            <i class="fas fa-comments text-white mr-1"></i><span class = "mr-3 text-white">community</span>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to new_post_path do %>
+            <i class="fas fa-paper-plane text-white mr-1"></i><span class = "mr-3 text-white">Post</span>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to destroy_member_session_path, method: :delete do %>
+            <i class="fas fa-door-open text-white mr-1"></i><span class = "mr-3 text-white">Log out</span>
+          <% end %>
+        </li>
       </ul>
     <% else %>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><%= link_to "ログイン", new_member_session_path,      class: "mx-3 text-white" %></li>
-        <li class="nav-item"><%= link_to "新規登録", new_member_registration_path, class: "mx-3 text-white" %></li>
+        <li class="nav-item">
+          <%= link_to new_member_session_path do %>
+            <i class="fas fa-door-open text-white mr-1"></i><span class = "mr-3 text-white">Log in</span>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to new_member_registration_path do %>
+            <i class="fas fa-user-plus text-white mr-1"></i></i><span class = "mr-3 text-white">Sign up</span>
+          <% end %>
+        </li>
       </ul>
     <% end %>
   </div>
