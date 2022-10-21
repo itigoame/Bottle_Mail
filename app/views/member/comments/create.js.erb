@@ -1,0 +1,3 @@
+$(".comment-all").html("<%= j(render "member/comments/comment" ,comments: @comments, comment: @comment, member: @member, post: @post) %>");
+$(".comment-count").html("<%= @post.comments.count %>");
+$("#comment_body").val("");
