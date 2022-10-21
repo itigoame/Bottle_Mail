@@ -11,27 +11,18 @@ class Member::CommentsController < ApplicationController
   end
 
   def create
-    post    = Post.find(params[:post_id])
-    comment = current_member.comments.new(comment_params)
-    comment.post_id = post.id
-    if comment.save
-      redirect_back(fallback_location: root_url)
-    else
-      flash[:comment_create_alret] = "投稿に失敗しました。もう一度お試しください"
-      @post      = Post.find(params[:post_id])
-      @member    = @post.member
-      @empathies = @post.empathies
-      @comment   = Comment.new
-      @comments  = @post.comments
-      render template: "member/posts/show"
-    end
+    @post    = Post.find(params[:post_id])
+    @comments  = @post.comments
+    @comment = current_member.comments.new(comment_params)
+    @comment.post_id = @post.id
+    @comment.save
   end
 
   def destroy
-    post    = Post.find(params[:post_id])
-    comment = current_member.comments.find_by(post_id: post.id)
-    comment.destroy
-    redirect_to admin_post_path(post)
+    @post      = Post.find(params[:post_id])
+    @comments  = @post.comments
+    @comment   = current_member.comments.find_by(id: params[:id], post_id: @post.id)
+    @comment.destroy
   end
 
   private

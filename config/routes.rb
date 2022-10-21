@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :members,       only: [:show,   :edit, :index, :update] do
-      resources :rooms,       only: [:show,   :index] do
+    resources :members,       only: [:show, :edit, :index, :update] do
+      resources :rooms,       only: [:show, :index] do
       end
     end
     resources :chats,         only:  :destroy
@@ -26,8 +26,13 @@ Rails.application.routes.draw do
 
   end
 
+  devise_scope :member do
+    # ユーザー登録失敗時のリダイレクトのエラー防止
+    get '/members', to: 'member/registrations#new'
+  end
+
   scope module: :member do
-    resources :members,       only:   [:show,   :edit, :update] do
+    resources :members,       only:   [:show, :edit, :update] do
       get     :followers, :followings
     end
     resource  :relationships, only:   [:create, :destroy]
