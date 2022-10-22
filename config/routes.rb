@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
     resources :chats,         only:  :destroy
     resources :categories,    only: [:create, :index, :edit, :update, :destroy, :show] do
-      resources :genres,      only: [:create, :index, :edit, :update, :destroy]
+      resources :genres,      only: [:create, :edit, :update, :destroy]
       resources :posts,       only:  :index
     end
     resources :posts,         only: [:show, :destroy] do
