@@ -1,11 +1,11 @@
 <% members.each do |member| %>
   <div class="d-flex flex-wrap ml-5 my-4 py-1 shadow">
 
-    <%= link_to member_path(member.id),class: "col-md-2 text-body" do %>
+    <%= link_to member_path(member.id),class: "col-md-2 text-body text-decoration-none" do %>
       <%= image_tag member.get_profile_image(50,50) %>
     <% end %>
 
-    <%= link_to member_path(member.id),class: "row col-6 text-body" do %>
+    <%= link_to member_path(member.id),class: "row col-6 text-body text-decoration-none" do %>
       <div class="col-md-12"><%= member.name %></div>
       <div class="col-md-12"><%= member.self_introduction %></div>
     <% end %>
@@ -13,9 +13,9 @@
     <div class="col-md-2 md-ml-5 small">
       <% unless member == current_member %>
         <% if current_member.following?(member) %>
-          <%= link_to "フォローをやめる",relationships_path(member_id: member.id), method: :delete,class: "text-body" %>
+          <%= link_to "フォローをやめる",relationships_path(member_id: member.id), method: :delete,class: "text-body text-decoration-none" %>
         <% else %>
-          <%= link_to "フォローする",    relationships_path(member_id: member.id), method: :post,  class: "text-body" %>
+          <%= link_to "フォローする",    relationships_path(member_id: member.id), method: :post,  class: "text-body text-decoration-none" %>
         <% end %>
       <% end %>
     </div>
