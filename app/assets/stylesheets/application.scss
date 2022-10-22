@@ -43,6 +43,18 @@ img.logo-image {
   }
 }
 
+img.no_image {
+  width: 500px;
+  height: auto;
+}
+
+@media screen and (max-width: 576px) {
+  img.no_image {
+    width: 350px;
+    height: auto;
+  }
+}
+
 .empathy_count:hover {
   // background-color: yellow;
   border-bottom: solid 1px #000;

@@ -4,11 +4,11 @@
   <%= form_with model: @member do |f| %>
     <div class="row my-3 form-group">
       <div class="col-md-3 com-sm-12">名前</div>
-      <div class="col-md-8 com-sm-12"><%= f.text_field :name,:placeholder => "20文字",class: "form-control" %></div>
+      <div class="col-md-8 com-sm-12"><%= f.text_field :name,:placeholder => "20文字まで",class: "form-control" %></div>
     </div>
     <div class="row mb-3 form-group">
       <div class="col-md-3 com-sm-12">自己紹介</div>
-      <div class="col-md-8 com-sm-12"><%= f.text_area :self_introduction,:placeholder => "100文字",class: "form-control" %></div>
+      <div class="col-md-8 com-sm-12"><%= f.text_area :self_introduction,:placeholder => "100文字まで",class: "form-control" %></div>
     </div>
     <div class="row mb-3 form-group">
       <div class="col-md-3 com-sm-12">画像</div>
