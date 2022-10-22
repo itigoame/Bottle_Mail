@@ -8,9 +8,9 @@ class SearchesController < ApplicationController
       @members = Member.looks(params[:word])
     else
       if params[:genre_id]
-        @posts = Genre.looks(params[:genre_id])
+        @posts = Genre.looks(params[:genre_id]).order(created_at: "DESC")
       else
-        @posts = Post.looks(params[:word])
+        @posts = Post.looks(params[:word]).order(created_at: "DESC")
       end
       @genres = Genre.all
       if member_signed_in?
