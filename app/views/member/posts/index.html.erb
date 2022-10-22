@@ -1,7 +1,12 @@
-<% unless @category.posts.present? %>
-  <p>投稿はまだありません。</p>
-<% else %>
-  <div class="container mt-3">
+<div class="container mt-3">
+  <div>「<%= @category.name %>」の投稿一覧</div>
+
+  <% unless @category.posts.present? %>
+    <div class ="d-flex justify-content-center mt-5 pt-3" >
+      <%= image_tag "no_post.png",class: "no_image",width: "500",height: "auto" %>
+    </div>
+  <% else %>
+  <!--検索バー-->
     <%= render "searches/search-form" %>
       <% if @category.genres.present? %>
         <%= form_with url: search_path, method: :get do |f| %>
@@ -9,8 +14,8 @@
             <div class="col-sm-4 my-1">
               <%= f.collection_select :genre_id, @genres, :id, :name ,{}, {class: "form-control"} %>
             </div>
-            <div class="col-sm-2 my-1">
-              <%= f.submit "検索", class: "btn btn-block btn-secondary" %>
+            <div class="col-sm-4 my-1">
+              <%= f.submit "ジャンル別検索", class: "btn btn-block btn-secondary" %>
             </div>
           </div>
         <% end %>
@@ -19,7 +24,7 @@
     <% @posts.each do |post| %>
       <% if current_member.gender == post.member.gender %>
         <div class="bg-info mb-2">
-          <%= link_to post_path(post.id),class: "text-decoration-none" do %>
+          <%= link_to post_path(post.id) do %>
             <div class="d-flex justify-content-center mt-3 px-2 py-2 bg-info text-white">
               <div class="col-md-8">
                 <%= image_tag post.member.get_profile_image(50, 50),class: "mr-3" %>
@@ -65,5 +70,5 @@
 
     <% end %>
 
-  </div>
-<% end %>
+  <% end %>
+</div>
