@@ -21,7 +21,7 @@
       <% elsif admin_signed_in? && (chat.member.id != @member.id) %>
         <div class="shadow">
           <div class="d-flex align-items-center">
-            <div><%= image_tag @partner.member.get_profile_image(30,30) %><%= @partner.member.name %></div>
+            <div class = "ml-3"><%= image_tag @partner.member.get_profile_image(30,30) %><%= @partner.member.name %></div>
               <%= link_to admin_chat_path(chat),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
                 <i class="far fa-trash-alt"></i>
               <% end %>

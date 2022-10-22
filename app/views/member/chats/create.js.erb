@@ -1,0 +1,2 @@
+$(".chat-all").html("<%= j(render "member/chats/chat" ,chats: @chats, chat: @chat, room: @room) %>");
+$("#chat_message").val("");
