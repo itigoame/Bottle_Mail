@@ -3,14 +3,13 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     category = Category.new(category_params)
-
     if category.save
-      redirect_back(fallback_location: root_url)
+      redirect_back(fallback_location: root_path)
     else
       flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
       @category   = Category.new
       @categories = Category.all
-      render :index
+      redirect_back(fallback_location: root_path)
     end
 
   end
@@ -38,7 +37,7 @@ class Admin::CategoriesController < ApplicationController
     else
       flash[:edit_alret] = "編集に失敗しました。もう一度お試しください"
       @category = Category.find(params[:id])
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
 
   end

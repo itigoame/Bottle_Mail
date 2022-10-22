@@ -22,7 +22,7 @@ class Admin::MembersController < ApplicationController
       redirect_to admin_member_path(@member.id)
     else
       flash[:edit_alret] = "編集に失敗しました。もう一度お試しください"
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
   end
 
