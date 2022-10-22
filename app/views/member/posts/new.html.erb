@@ -2,22 +2,22 @@
 <div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
   <%= form_with model: @post,url: posts_path,method: :post do |f| %>
   <%= flash[:post_create_alret] %>
-    <div class="row">
+    <div class="row my-3">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">タイトル</div>
-      <div class="col-md-4 my-2 md-my-3"><%= f.text_field :title %></div>
+      <div class="col-md-4 my-2 md-my-3"><%= f.text_field :title,:placeholder => "20文字以内" %></div>
     </div>
-    <div class="row">
+    <div class="row my-3">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">本文</div>
-      <div class="col-md-4 my-2 md-my-3"><%= f.text_area :body %></div>
+      <div class="col-md-4 my-2 md-my-3"><%= f.text_area :body,:placeholder => "300文字以内" %></div>
     </div>
-    <div class="row">
+    <div class="row my-3">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">カテゴリー選択</div>
       <div class="col-md-4 my-2 md-my-3">
         <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
       </div>
     </div>
     <!--カテゴリーに対するジャンルが存在する場合のみ表示-->
-    <div class="row d-none" id="genre_form">
+    <div class="row my-3 d-none" id="genre_form">
       <div class=" col-md-6 my-2 md-my-3 text-left text-md-right">ジャンル選択</div>
       <div class="col-md-4 my-2 md-my-3 px-0">
         <select class="px-0 mx-3" name="post[genre_id]" id="post_genre_id"></select>

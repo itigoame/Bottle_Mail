@@ -29,7 +29,8 @@ class Member < ApplicationRecord
 
   enum gender: { men: 1, women: 2, }
 
-  validates :name, presence: true
+  validates :name, presence: true,length: { minimum: 1, maximum: 20 }
+  validates :self_introduction,length: { maximum: 100 }
 
   has_many :comments,  dependent: :destroy
   has_many :empathies, dependent: :destroy
