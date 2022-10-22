@@ -1,7 +1,7 @@
 
 <div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
   <%= form_with model: @post,url: posts_path,method: :post do |f| %>
-  <%= flash[:create_alret] %>
+  <%= flash[:post_create_alret] %>
     <div class="row">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">タイトル</div>
       <div class="col-md-4 my-2 md-my-3"><%= f.text_field :title %></div>

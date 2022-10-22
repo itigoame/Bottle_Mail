@@ -33,7 +33,7 @@
   <%= form_with model: @chat,url:room_chats_path(@room.id) do |f| %>
     <div class="row justify-content-center fixed-bottom">
       <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
-        <%= flash[:create_alret] %>
+        <%= flash[:chat_create_alret] %>
         <%= f.text_area :message, class: "form-control" %>
         <%= f.hidden_field :room_id, value: @room.id %>
       </div>

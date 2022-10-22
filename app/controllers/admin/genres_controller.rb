@@ -6,11 +6,11 @@ class Admin::GenresController < ApplicationController
     @genre.category_id = @category.id
 
     if @genre.save
-      redirect_to request.referer
+      redirect_back(fallback_location: root_path)
     else
       flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
       @genres = @category.genres.all
-      redirect_to request.referer
+      redirect_back(fallback_location: root_path)
     end
 
   end
@@ -33,7 +33,7 @@ class Admin::GenresController < ApplicationController
       flash[:edit_alret] = "編集に失敗しました。もう一度お試しください"
       @genre    = Genre.find(params[:id])
       @category = Category.find(params[:category_id])
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
 
   end
@@ -41,7 +41,7 @@ class Admin::GenresController < ApplicationController
   def destroy
     genre = Genre.find(params[:id])
     genre.destroy
-    redirect_to request.referer
+    redirect_back(fallback_location: root_path)
   end
 
   private

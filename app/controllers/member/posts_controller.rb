@@ -20,10 +20,10 @@ class Member::PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post.id)
     else
-      flash[:create_alret] = "投稿に失敗しました。もう一度お試しください"
+      flash[:post_create_alret] = "投稿に失敗しました。もう一度お試しください"
       @post       = Post.new
       @categories = Category.all
-      render :new
+      redirect_back(fallback_location: root_path)
     end
   end
 
