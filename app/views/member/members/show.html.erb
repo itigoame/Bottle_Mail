@@ -14,42 +14,37 @@
       <% end %>
     </div>
 
-    <div class="ml-auto">
+    <div class="ml-auto  d-flex">
       <!--本人のみプロフィール編集とDM一覧表示-->
       <% if @member == current_member %>
-        <%= link_to "プロフィール編集",edit_member_path(@member.id), class: "text-body" %>
-        <%= link_to rooms_path , class: "text-body ml-3" do %>
-          <i class="fas fa-envelope"></i>
-        <% end %>
+        <%= link_to "編集",edit_member_path(@member.id), class: "border border-dark text-dark rounded-pill pt-2 px-3 small text-decoration-none" %>
 
       <% else %>
+        <% if current_member.following?(@member) %>
+          <%= link_to "フォロー中",relationships_path(member_id: @member.id), method: :delete, class: "text-body mr-2" %>
+        <% else %>
+          <%= link_to "フォローする",    relationships_path(member_id: @member.id), method: :post,   class: "text-body mr-2" %>
+        <% end %>
       <!--相互フォローのみDM可-->
         <% if current_member.following?(@member) && @member.following?(current_member) %>
           <!--DMの履歴があれば表示、なければ作成-->
           <% if @is_room == true %>
             <%= link_to room_path(@room_id) ,class: "text-body" do %>
-              <i class="fas fa-envelope"></i>
+              <i class="h5 fas fa-paper-plane mb-0 "></i>
             <% end %>
           <% else %>
-
             <%= form_with model: @is_room,url: rooms_path do |f| %>
               <%= fields_for @entry do |entry| %>
                 <%= entry.hidden_field :member_id, value: @member.id %>
                 <%= f.button :type => "submit", class: 'dm-button' do %>
-                  <i class="fas fa-envelope"></i>
+                  <i class="h5 fas fa-paper-plane mb-0 "></i>
                 <% end %>
               <% end %>
             <% end %>
-
           <% end %>
 
         <% end %>
 
-        <% if current_member.following?(@member) %>
-          <%= link_to "フォローをやめる",relationships_path(member_id: @member.id), method: :delete, class: "text-body" %>
-        <% else %>
-          <%= link_to "フォローする",    relationships_path(member_id: @member.id), method: :post,   class: "text-body" %>
-        <% end %>
       <% end %>
     </div>
 
@@ -69,6 +64,9 @@
 
 <div class="container">
   <%= @posts.count %>投稿
+  <%= link_to member_empathies_path(@member),class: "text-dark ml-2" do %>
+    <i class="fas fa-lightbulb text-warning mr-1"></i>一覧
+  <% end %>
 
   <% @posts.each do |post| %>
     <div class="bg-info my-2">
