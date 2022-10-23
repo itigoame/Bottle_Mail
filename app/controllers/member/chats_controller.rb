@@ -1,11 +1,11 @@
 class Member::ChatsController < ApplicationController
   before_action :authenticate_member!
-  before_action :corrent_check, only: [:create, :destroy]
+  before_action :current_check, only: [:create, :destroy]
 
-  def corrent_check
+  def current_check
     @room = Room.find(params[:room_id])
-    @chat = current_member.chats.find_by(room_id: @room.id)
-    unless @chat.member.id == current_member.id
+    @entry = current_member.entries.find_by(room_id: @room.id)
+    unless @entry.member.id == current_member.id
       redirect_to root_path
     end
   end

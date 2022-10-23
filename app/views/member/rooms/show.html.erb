@@ -1,6 +1,6 @@
 <div class ="container mt-3">
 
-  <%= link_to member_path(@partner.id), class: "text-body text-decoration-none" do %>
+  <%= link_to member_path(@partner_id), class: "text-body text-decoration-none" do %>
     <h4><%= image_tag @partner.member.get_profile_image(50,50) %>　<%= @partner.member.name %></h4>
   <% end %>
 </div>

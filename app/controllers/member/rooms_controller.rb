@@ -16,8 +16,9 @@ class Member::RoomsController < ApplicationController
       @chats    = @room.chats
       @entries  = @room.entries
       @partner  = @entries.where.not(member_id: current_member.id).first
+      @partner_id = @partner.member.id
     else
-      redirect_back(fallback_location: root_path)
+      redirect_to member_path(current_member)
     end
 
   end

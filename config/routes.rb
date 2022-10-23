@@ -33,7 +33,8 @@ Rails.application.routes.draw do
 
   scope module: :member do
     resources :members,       only:   [:show, :edit, :update] do
-      get     :followers, :followings
+      resources :empathies,   only:    :index
+      get       :followers, :followings
     end
     resource  :relationships, only:   [:create, :destroy]
     resources :rooms,         only:   [:create, :show, :index] do
