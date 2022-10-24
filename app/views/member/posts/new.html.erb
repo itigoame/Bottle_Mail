@@ -53,15 +53,16 @@
       .done(function(genres) { // 成功
         // もしgenresが無しの場合は、セレクトボックス非表示
         console.log(genres);
+        // 一旦セレクトボックスをリセット
+        $('#post_genre_id > option').remove();
+
         if (genres.length === 0) {
           $('#genre_form').removeClass('d-flex').addClass('d-none');
-
           return false; // ここで処理を止める
         }
         // class変更で表示/非表示
         $('#genre_form').removeClass('d-none').addClass('d-flex');
-        // 一旦セレクトボックスをリセット
-        $('#post_genre_id > option').remove();
+
         genres.forEach(function(genre) { // ループ
           // 取得したセレクトボックスデータを追加していく
           $('#post_genre_id').append($('<option>').html(genre.name).val(genre.id));
