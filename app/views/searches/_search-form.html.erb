@@ -12,3 +12,16 @@
     </div>
   </div>
 <% end %>
+<% if @category.genres.present? %>
+  <%= form_with url: search_path, method: :get do |f| %>
+    <div class="form-group row">
+      <div class="col-sm-4 my-1">
+        <%= f.collection_select :genre_id, @genres, :id, :name,{ }, {class: "form-control"} %>
+        <%= f.hidden_field :category_id, :value => @category.id %>
+      </div>
+      <div class="col-sm-4 my-1">
+        <%= f.submit "ジャンル別検索", class: "btn btn-block btn-secondary" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
