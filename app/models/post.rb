@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :empathies, dependent: :destroy
 
   validates :title,       presence: true, length: { minimum: 1, maximum: 20 }
-  validates :body,        presence: true, length: { minimum: 1, maximum: 300 }
+  validates :body,        presence: true, length: { minimum: 1, maximum: 250 }
   validates :category,    presence: true
 
   def closed_check
