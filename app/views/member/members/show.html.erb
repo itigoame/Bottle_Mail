@@ -64,8 +64,8 @@
 
 <div class="container mt-3">
   <%= @posts.count %>投稿
-  <%= link_to member_empathies_path(@member),class: "text-dark ml-2 text-decoration-none" do %>
-    <span class = "border border-dark text-dark rounded-pill py-1 px-3 small"><i class="fas fa-lightbulb text-warning mr-1"></i>一覧へ</span>
+  <%= link_to member_empathies_path(@member),class: "text-dark ml-2" do %>
+    <i class="fas fa-lightbulb text-warning mr-1"></i>一覧へ
   <% end %>
 
   <% @posts.each do |post| %>
