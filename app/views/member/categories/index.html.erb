@@ -2,7 +2,7 @@
   <div class = "row mx-2">
 
     <% @categories.each do |category| %>
-      <div class    = "card col-md-3 offset-md-2 my-4 text-center bg-info">
+      <div class    = "card col-md-4 offset-md-1 my-4 text-center bg-info">
         <%= link_to category_posts_path(category.id), class: "text-white" do %>
         <div class  = "card-body py-5">
           <h3 class = "card-title">
