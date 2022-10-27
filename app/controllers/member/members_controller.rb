@@ -24,7 +24,7 @@ class Member::MembersController < ApplicationController
     if current_member.gender == @member.gender
       @following_members     = @member.following_members
       @follower_members      = @member.follower_members
-      @posts                 = @member.posts
+      @posts                 = @member.posts.order(created_at: "DESC")
 
       # チャット機能
       @current_entry = Entry.where(member_id: current_member.id)

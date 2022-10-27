@@ -5,7 +5,7 @@ class Admin::MembersController < ApplicationController
     @member            = Member.find(params[:id])
     @following_members = @member.following_members
     @follower_members  = @member.follower_members
-    @posts             = @member.posts
+    @posts             = @member.posts.order(created_at: "DESC")
   end
 
   def index
