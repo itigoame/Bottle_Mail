@@ -15,6 +15,7 @@
 相談や愚痴を誰かに聞いて欲しいとき。同じ悩みを持った友人が欲しい時。
 
 ## 設計書
+(https://user-images.githubusercontent.com/110168274/198171558-91a98ff0-819f-41d2-afb5-fc9234d19f20.png)
 
 ## 開発環境
 - OS：Linux(CentOS)
