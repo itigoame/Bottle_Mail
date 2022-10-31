@@ -49,7 +49,7 @@
       <% end %>
     </div>
     <div class="col-md-4 col-sm-12 text-md-right">
-      <!--投稿の管理.-->
+      <!--投稿の管理-->
       <% if admin_signed_in? %>
         <%= post.closed_check %>
         <%= link_to "削除", admin_post_path(post.id), method: :delete,data: {confirm: "投稿を削除しますか？"} %>
