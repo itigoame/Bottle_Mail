@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <div class = "row">メッセージ一覧</div>
-  <% if another_entries.blank? %>
+  <% unless another_entries %>
     <p>メッセージはまだありません。<br>
        お互いがフォロワーになるとメッセージが送れるようになります。</p>
   <% else %>

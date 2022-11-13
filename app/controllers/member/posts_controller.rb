@@ -33,7 +33,7 @@ class Member::PostsController < ApplicationController
       @member                = @post.member
       @empathies             = @post.empathies
       @comment               = Comment.new
-      @comments              = @post.comments
+      @comments              = @post.comments.includes(:member)
     else
       redirect_to root_path
     end
@@ -41,8 +41,9 @@ class Member::PostsController < ApplicationController
 
   def index
     @category = Category.find(params[:category_id])
-    @posts    = @category.posts.order(created_at: "DESC")
+    @posts    = @category.posts.includes(:category, :genre, :comments, :empathies, :member).where(members: {gender: current_member.gender}).order(created_at: "DESC")
     @genres   = @category.genres
+
   end
 
   def update
