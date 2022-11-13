@@ -12,10 +12,10 @@ class Member::RoomsController < ApplicationController
     @room = Room.find(params[:id])
 
     if Entry.where(member_id: current_member.id, room_id: @room.id).present?
-      @chat     = Chat.new
-      @chats    = @room.chats
-      @entries  = @room.entries
-      @partner  = @entries.where.not(member_id: current_member.id).first
+      @chat       = Chat.new
+      @chats      = @room.chats
+      @entries    = @room.entries
+      @partner    = @entries.where.not(member_id: current_member.id).first
       @partner_id = @partner.member.id
     else
       redirect_to member_path(current_member)

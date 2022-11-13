@@ -1,13 +1,13 @@
 <div class="container mt-3">
 
-  <% unless @category.posts.present? %>
+  <% unless @posts.present? %>
     <div class ="d-flex justify-content-center mt-5 pt-3" >
       <%= image_tag "no_post.png",class: "no_image",width: "500",height: "auto" %>
     </div>
   <% else %>
     <!--検索バー-->
     <%= render "searches/search-form" %>
-      <% unless @posts.exists? %>
+      <% unless @posts %>
         <div class ="d-flex justify-content-center mt-5 pt-3" >
           <%= image_tag "no_search.png",class: "no_image",width: "500",height: "auto" %>
         </div>
@@ -52,11 +52,11 @@
                 <div class="col-md-4">
                   <span id="empathy_counts<%= post.id %>" >
                     <!--いいね機能テンプレート-->
-                    <%= render "member/empathies/empathy_link", post: post, empathies: @empathies %>
+                    <%= render "member/empathies/empathy_link", post: post %>
                   </span>
                     <i class="fas fa-comment text-white  ml-3"></i>
                     <span class = "text-secondary">
-                      <%= post.comments.count %>
+                      <%= post.comments.size %>
                     </span>
                 </div>
 
