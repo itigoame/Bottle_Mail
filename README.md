@@ -22,3 +22,9 @@
 - 言語：HTML,CSS,JavaScript
 - フレームワーク：Ruby on Rails
 - IDE：Cloud9
+
+## 使用素材
+- https://www.canva.com/
+- https://www.photo-ac.com/main/detail/22406110
+- https://vectorshelf.com/
+- https://fontawesome.com/icons
