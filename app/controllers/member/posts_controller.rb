@@ -4,7 +4,7 @@ class Member::PostsController < ApplicationController
 
   def corrent_check
     @post                  = Post.find(params[:id])
-    unless @post.member.id = current_member.id
+    unless @post.member.id == current_member.id
       redirect_to root_path
     end
   end
