@@ -8,7 +8,7 @@
     <% @chats.each do |chat| %>
     <!--投稿しているユーザーによってコメントの表示場所を変える-->
       <% if admin_signed_in? && (chat.member.id == @member.id) %>
-        <div class="d-flex justify-content-end text-right mb-3 align-items-center shadow">
+        <div class="col-12 d-flex justify-content-end text-right mb-3 align-items-center shadow">
           <div class="col-md-8 text-break px-0 my-auto">
             <%= simple_format(chat.message, {}, wrapper_tag: "div") %>
           </div>
@@ -19,7 +19,7 @@
           <% end %>
         </div>
       <% elsif admin_signed_in? && (chat.member.id != @member.id) %>
-        <div class="shadow">
+        <div class="col-12 shadow">
           <div class="d-flex align-items-center">
             <div class = "ml-3"><%= image_tag @partner.member.get_profile_image(30,30) %><%= @partner.member.name %></div>
               <%= link_to admin_chat_path(chat),method: :delete,class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
