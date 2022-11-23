@@ -7,7 +7,9 @@
 
     <%= link_to member_path(member.id),class: "row col-6 text-body text-decoration-none" do %>
       <div class="col-md-12"><%= member.name %></div>
-      <div class="col-md-12"><%= member.self_introduction.truncate(30) %></div>
+      <% if member.self_introduction %>
+        <div class="col-md-12"><%= member.self_introduction.truncate(30) %></div>
+      <% end %>
     <% end %>
 
     <div class="col-md-2 md-ml-5 small">
