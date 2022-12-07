@@ -1,6 +1,20 @@
-<div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
+<div class = "container mt-2 pt-5 d-flex flex-column align-items-center justify-content-center">
+
+  <!--エラー文-->
+  <div id = "post_create_alret">
+    <% if @post.errors.any? %>
+    <%#= javascript_pack_tag 'posts/render' %>
+      <%= @post.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+
   <%= form_with model: @post,url: posts_path,method: :post do |f| %>
-  <%= flash[:post_create_alret] %>
     <div class="row my-3">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">タイトル</div>
       <div class="col-md-6 my-2 md-my-3"><%= f.text_field :title,:placeholder => "20文字まで" %></div>
@@ -12,7 +26,7 @@
     <div class="row my-3">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">カテゴリー選択</div>
       <div class="col-md-6 my-2 md-my-3">
-        <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
+        <%= f.collection_select :category_id, @categories, :id, :name %>
       </div>
     </div>
     <!--カテゴリーに対するジャンルが存在する場合のみ表示-->
@@ -74,3 +88,7 @@
     })
   })
 </script>
+
+<% if @post.errors.any? %>
+  <%= javascript_pack_tag 'render' %>
+<% end %>
