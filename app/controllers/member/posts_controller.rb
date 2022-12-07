@@ -21,9 +21,8 @@ class Member::PostsController < ApplicationController
       redirect_to post_path(@post.id)
     else
       flash[:post_create_alret] = "投稿に失敗しました。もう一度お試しください"
-      @post       = Post.new
       @categories = Category.all
-      redirect_back(fallback_location: root_path)
+      render "new"
     end
   end
 

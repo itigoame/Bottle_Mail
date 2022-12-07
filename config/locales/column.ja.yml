@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      member: 会員
+      post: 投稿
+    attributes:
+      member:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+      post:
+        category: カテゴリー
+        genre: ジャンル
+        title: タイトル
+        body: 本文
