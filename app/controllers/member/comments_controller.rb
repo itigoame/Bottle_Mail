@@ -15,6 +15,7 @@ class Member::CommentsController < ApplicationController
     @comments  = @post.comments
     @comment = current_member.comments.new(comment_params)
     @comment.post_id = @post.id
+    @post.create_notification_comment(current_member, @comment.id)
     @comment.save
   end
 

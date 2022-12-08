@@ -14,10 +14,13 @@
       <% end %>
     </div>
 
-    <div class="ml-auto  d-flex">
+    <div class="ml-auto d-flex align-items-center">
       <!--本人のみプロフィール編集とDM一覧表示-->
       <% if @member == current_member %>
-        <%= link_to "編集",edit_member_path(@member.id), class: "border border-dark text-dark rounded-pill pt-2 px-3 small text-decoration-none" %>
+        <%= link_to notifications_index_path do %>
+          <i class="fas fa-bell text-warning mr-3 my-1 h4 "></i>
+        <% end %>
+        <%= link_to "編集",edit_member_path(@member.id), class: "border border-dark text-dark rounded-pill p-2 small text-decoration-none" %>
 
       <% else %>
         <% if current_member.following?(@member) %>

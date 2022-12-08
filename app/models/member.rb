@@ -39,6 +39,12 @@ class Member < ApplicationRecord
   has_many :chats,     dependent: :destroy
   has_many :rooms,     dependent: :destroy
 
+  #通知機能
+  #自分が相手に送った通知
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  #相手が自分に送った通知
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+
   #フォロー機能
   has_many :followers,        class_name: "Relationship",foreign_key: :follower_id, dependent: :destroy
   has_many :follower_members, through: :followers, source: :followed #自分がフォローしてる人一覧
