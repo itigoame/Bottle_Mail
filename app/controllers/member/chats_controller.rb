@@ -15,6 +15,8 @@ class Member::ChatsController < ApplicationController
     @chat  = current_member.chats.new(chat_params)
     @chat.save
     @chats = @room.chats
+    @room.create_notification_chat(current_member, @chat.id)
+    redirect_to room_path(@room)
   end
 
   def destroy

@@ -4,18 +4,18 @@
       <% chats.each do |chat| %>
 
         <% if chat.member.id == current_member.id %>
-          <div class="d-flex flex-nowrap align-items-center justify-content-end text-right mb-3 shadow">
-            <div class="col-md-11 col-sm-11 px-0 text-break">
-              <%= simple_format(chat.message, {}, wrapper_tag: "div") %>
+          <div class="my-2 shadow">
+            <div class ="small m-1 text-left">
+              <%= chat.created_at.strftime('%Y/%m/%d %H:%M') %>
+              <%= link_to room_chat_path(room.id,chat.id),method: :delete, remote:true, class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
+                <i class="far fa-trash-alt text-right"></i>
+              <% end %>
             </div>
-            <%= link_to room_chat_path(room.id,chat.id),method: :delete, remote:true, class: "btn", data: {confirm: "メッセージを削除しますか？"} do %>
-              <div class="col-md-1 col-sm-1 px-0">
-                <i class="far fa-trash-alt"></i>
-              </div>
-            <% end %>
+            <div class="col-md-12 com-sm-12 text-break text-right pb-1"><%= simple_format(chat.message) %></div>
           </div>
         <% else %>
-          <div class="my-2 shadow">
+          <div class="my-2 py-2 shadow">
+            <div class ="small mx-1 text-right"><%= chat.created_at.strftime('%Y/%m/%d %H:%M') %></div>
             <div class="col-md-12"><%= image_tag chat.member.get_profile_image(30,30) %>　<%= chat.member.name %></div>
             <div class="col-md-12 com-sm-12 text-break"><%= simple_format(chat.message) %></div>
           </div>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="container form-design">
-    <%= form_with model: chat,url:room_chats_path(room.id),method: :post, local: false do |f| %>
+    <%= form_with model: chat,url:room_chats_path(room.id),method: :post do |f| %>
       <div class="row justify-content-center fixed-bottom">
         <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
           <%= flash[:chat_create_alret] %>

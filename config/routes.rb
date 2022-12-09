@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'notifications/index'
   devise_for :members, skip: [:passwords] , controllers: {
   registrations: "member/registrations",
   sessions: 'member/sessions'
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
       resources :genres,      only:   :index
       resources :posts,       only:   :index
     end
+    resources :notifications, only:   :index
 
     root to: 'homes#top'
     get      ':id/unsubscribe' => 'members#unsubscribe', as: 'unsubscribe'

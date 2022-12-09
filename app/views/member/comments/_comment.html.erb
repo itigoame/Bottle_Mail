@@ -48,7 +48,7 @@
   <% if member_signed_in? %>
     <div class="container form-design">
       <% if post.is_closed == false %>
-        <%= form_with model: comment,url: post_comments_path(post.id),method: :post, local: false do |f| %>
+        <%= form_with model: comment,url: post_comments_path(post.id),method: :post do |f| %>
           <div class="row justify-content-center fixed-bottom">
             <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
               <%= f.text_area :body,:placeholder => "500文字まで", class: "form-control" %>

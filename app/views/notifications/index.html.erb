@@ -1,0 +1,12 @@
+<% notifications = @notifications.where.not(visitor_id: current_member.id) %>
+<div class="container my-3">
+  <div class="row mx-2 flex-column">
+    <% if notifications.exists? %>
+
+      <%= render notifications %>
+      <%= paginate notifications %>
+    <% else %>
+      <p>通知はありません</p>
+    <% end %>
+  </div>
+</div>
