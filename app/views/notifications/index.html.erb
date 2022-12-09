@@ -1,13 +1,12 @@
-<% if (@notifications.where.not(visitor_id: current_member.id)) && (@notifications.exists?) %>
+<% notifications = @notifications.where.not(visitor_id: current_member.id) %>
+<div class="container my-3">
+  <div class="row mx-2 flex-column">
+    <% if notifications.exists? %>
 
-  <% case notification.action %>
-    <% when "follow" then %>
-      <%= image_tag @visitor.member.get_profile_image(30,30) %>
-      <%= @visitor.member.name %><snam>さんがあなたをフォローしました</snam>
-    <% when "comment" then %>
-      <%= image_tag @visitor.member.get_profile_image(30,30) %>
-      <%= @visitor.member.name %><snam>さんがコメント</snam>
-  <% end %>
-<% else %>
-  <P>通知はありません</P>
-<% end %>
+      <%= render notifications %>
+      <%= paginate notifications %>
+    <% else %>
+      <p>通知はありません</p>
+    <% end %>
+  </div>
+</div>

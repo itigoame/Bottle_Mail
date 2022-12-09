@@ -31,43 +31,30 @@ class Post < ApplicationRecord
   end
 
   #コメント通知
-  def create_notification_comment(current_member,visited_id)
-    visit_comment_ids = Comment.select(:member_id).where(post_id: id).where.not(member_id: current_member.id).distinct
-    #自分以外にコメントしている人全員に通知
-    visit_comment_ids.each do |visit_comment_id|
-      save_notification_comment(current_member, comment_id, visit_comment_id["member_id"])
+  def create_notification_comment(current_member, comment_id)
+    # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
+    post_comment_ids = Comment.select(:member_id).where(post_id: id).where.not(member_id: current_member.id).distinct
+    post_comment_ids.each do |post_comment_id|
+      save_notification_comment(current_member, comment_id, post_comment_id['member_id'])
+      save_notification_comment(current_member, comment_id, member_id)
     end
-    #コメント0件の場合は投稿者にのみ通知
-    save_notification_comment(current_member, comment_id, member_id) if visit_comment_ids.blank?
+    # まだ誰もコメントしていない場合は、投稿者に通知を送る
+    save_notification_comment(current_member, comment_id, member_id) if post_comment_ids.blank?
   end
 
   def save_notification_comment(current_member, comment_id, visited_id)
-    #コメントするたびに通知する
+    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
     notification = current_member.active_notifications.new(
       post_id: id,
       comment_id: comment_id,
       visited_id: visited_id,
-      action: "comment"
+      action: 'post_comment'
     )
-
-    #自分の投稿は通知済みにして送らない
+    # 自分の投稿に対するコメントの場合は、通知済みとする
     if notification.visitor_id == notification.visited_id
       notification.checked = true
     end
     notification.save if notification.valid?
-  end
-
-  #フォロー通知
-  def create_notification_follow(current_member)
-    visit_follow = Notification.where(["visitor_id = ? and visited_id = ? and action = ?",current_member.id, id, "follow"])
-    #同一の通知レコードがない場合のみ通知
-    if visit_follow.blank?
-      notification = current_member.active_notifications.new(
-        visited_id: id,
-        action: "follow"
-      )
-      notification.save if notification.valid?
-    end
   end
 
 end

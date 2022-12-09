@@ -83,4 +83,17 @@ class Member < ApplicationRecord
       @member = Member.all
     end
   end
+  
+  #フォロー通知
+  def create_notification_follow(current_member)
+    visit_follow = Notification.where(["visitor_id = ? and visited_id = ? and action = ?",current_member.id, id, "follow"])
+    #同一の通知レコードがない場合のみ通知
+    if visit_follow.blank?
+      notification = current_member.active_notifications.new(
+        visited_id: id,
+        action: "follow"
+      )
+      notification.save if notification.valid?
+    end
+  end
 end

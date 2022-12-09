@@ -18,7 +18,11 @@
       <!--本人のみプロフィール編集とDM一覧表示-->
       <% if @member == current_member %>
         <%= link_to notifications_index_path do %>
-          <i class="fas fa-bell text-warning mr-3 my-1 h4 "></i>
+          <% if unchecked_notifications.any? %>
+            <i class="fas fa-bell text-warning mr-3 my-1 h4 "></i>
+          <% else %>
+            <i class="far fa-bell text-body mr-3 my-1 h4"></i>
+          <% end %>
         <% end %>
         <%= link_to "編集",edit_member_path(@member.id), class: "border border-dark text-dark rounded-pill p-2 small text-decoration-none" %>
 
