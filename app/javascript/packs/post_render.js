@@ -1,2 +1,2 @@
 history.replaceState('', '', '/posts/new')
-require("render")
+require("post_render")
