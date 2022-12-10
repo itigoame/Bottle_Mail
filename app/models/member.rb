@@ -39,6 +39,18 @@ class Member < ApplicationRecord
   has_many :chats,     dependent: :destroy
   has_many :rooms,     dependent: :destroy
 
+  #通知機能
+  #自分が相手に送った通知
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  #相手が自分に送った通知
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+
+  #通報機能
+  #通報した人
+  has_many :reporter_persons, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
+  #通報された人
+  has_many :reported_persons, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
+
   #フォロー機能
   has_many :followers,        class_name: "Relationship",foreign_key: :follower_id, dependent: :destroy
   has_many :follower_members, through: :followers, source: :followed #自分がフォローしてる人一覧
@@ -75,6 +87,19 @@ class Member < ApplicationRecord
       @member = Member.where("name LIKE ? OR self_introduction LIKE ?","%#{word}%","%#{word}%")
     else
       @member = Member.all
+    end
+  end
+
+  #フォロー通知
+  def create_notification_follow(current_member)
+    visit_follow = Notification.where(["visitor_id = ? and visited_id = ? and action = ?",current_member.id, id, "follow"])
+    #同一の通知レコードがない場合のみ通知
+    if visit_follow.blank?
+      notification = current_member.active_notifications.new(
+        visited_id: id,
+        action: "follow"
+      )
+      notification.save if notification.valid?
     end
   end
 end

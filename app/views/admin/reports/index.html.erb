@@ -1,0 +1,30 @@
+<div class="container mt-3">
+  <div class="row d-flex mt-4 p-2 mx-2 border-bottom">
+    <div class="col-md-3 col-sm-3"><strong>通報日</strong></div>
+    <div class="col-md-3 col-sm-3"><strong>通報者</strong></div>
+    <div class="col-md-3 col-sm-3"><strong>対象者</strong></div>
+    <div class="col-md-2 col-sm-2"><strong>対応</strong></div>
+  </div>
+  <% @reports.each do |report| %>
+    <% if report.dealt_with == false %>
+      <%= link_to admin_report_path(report.id), class: "text-body text-decoration-none" do %>
+      <div class="row d-flex p-2 mx-2 border-bottom date">
+        <div class="col-md-3 col-sm-3"><%= report.created_at.strftime('%Y/%m/%d %H:%M')%></div>
+        <div class="col-md-3 col-sm-3"><%= report.reporter.name %></div>
+        <div class="col-md-3 col-sm-3"><%= report.reported.name %></div>
+        <div class="col-md-2 col-sm-2"><%= report.status_check %></div>
+      </div>
+      <% end %>
+    <% else %>
+      <%= link_to admin_report_path(report.id), class: "text-body text-decoration-none" do %>
+        <div class="row d-flex p-2 mx-2 text-black-50 border-bottom">
+          <div class="col-md-3 col-sm-3"><%= report.created_at.strftime('%Y/%m/%d %H:%M') %></div>
+          <div class="col-md-3 col-sm-3"><%= report.reporter.name %></div>
+          <div class="col-md-3 col-sm-3"><%= report.reported.name %></div>
+          <div class="col-md-2 col-sm-2"><%= report.status_check %></div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<div class = "my-3"><%= paginate @reports %></div>
+</div>

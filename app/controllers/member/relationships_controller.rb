@@ -4,6 +4,7 @@ class Member::RelationshipsController < ApplicationController
   def create
     follower = Member.find(params[:member_id])
     current_member.follow(follower)
+    follower.create_notification_follow(current_member)
     redirect_back(fallback_location: root_url)
   end
 

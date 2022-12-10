@@ -1,0 +1,19 @@
+<div class="container form-design">
+    <!--エラー文-->
+  <div class="row my-3 justify-content-center">
+    <div class="col-md-10 my-2 md-my-3 form-group">
+      <span class ="text-danger"><%= flash[:report_create_alert] %></span>
+      <p class = "my-2">
+          通報理由を10文字以上でご記入ください。<br>
+          該当URLがありましたらあわせて記載をお願いいたします。
+      </p>
+      <%= form_with model: @report,url: member_reports_path,method: :post do |f| %>
+        <%= f.text_area :reason,:placeholder => "500文字まで", class: "form-control" %>
+        <div class="text-right">
+          <%= f.submit "通報",class: "col-md-2 btn btn-sm btn-block btn-secondary my-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

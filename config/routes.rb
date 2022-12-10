@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'notifications/index'
   devise_for :members, skip: [:passwords] , controllers: {
   registrations: "member/registrations",
   sessions: 'member/sessions'
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
     resources :relationships, only:  :index
     resources :comments,      only:  :destroy
     end
+    resources :reports,       only: [:index, :show, :update]
 
   end
 
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
   scope module: :member do
     resources :members,       only:   [:show, :edit, :update] do
       resources :empathies,   only:    :index
+      resources :reports,     only:   [:new, :create]
       get       :followers, :followings
     end
     resource  :relationships, only:   [:create, :destroy]
@@ -48,6 +51,9 @@ Rails.application.routes.draw do
       resources :genres,      only:   :index
       resources :posts,       only:   :index
     end
+    resources :notifications, only:   [:index]
+
+    # delete  ':notifications' => "notifications#destroy_all"
 
     root to: 'homes#top'
     get      ':id/unsubscribe' => 'members#unsubscribe', as: 'unsubscribe'

@@ -1,0 +1,42 @@
+<% visitor = notification.visitor %>
+
+      <% case notification.action %>
+        <% when 'follow' %>
+          <div class="col-md-11 shadow my-1 py-1">
+            <%= link_to member_path(visitor), class: "text-body text-decoration-none" do %>
+              <%= visitor.name %>
+              <%= image_tag visitor.get_profile_image(30,30) %>
+              さんがあなたをフォローしました
+              <div class ="text-right small">
+                <%= notification.created_at.strftime('%Y/%m/%d %H:%M') %>
+              </div>
+            <% end %>
+          </div>
+        <% when 'post_comment' %>
+          <div class="col-md-11 shadow my-1 py-1">
+            <%= link_to post_path(notification.post), class: "text-body text-decoration-none" do %>
+              <%= visitor.name %>
+              <%= image_tag visitor.get_profile_image(30,30) %>
+              さんが<%= notification.post.title.truncate(10) %>にコメントしました
+              <div class ="text-right small">
+                <%= notification.created_at.strftime('%Y/%m/%d %H:%M') %>
+              </div>
+            <% end %>
+          </div>
+        <% when 'room_chat' %>
+          <div class="col-md-11 shadow my-1 py-1">
+            <%= link_to room_path(notification.room), class: "text-body text-decoration-none" do %>
+              <%= visitor.name %>
+              <%= image_tag visitor.get_profile_image(30,30) %>
+              さんからチャットが届きました
+              <div class ="text-right small">
+                <%= notification.created_at.strftime('%Y/%m/%d %H:%M') %>
+              </div>
+            <% end %>
+          </div>
+
+      <% end %>
+
+
+
+
