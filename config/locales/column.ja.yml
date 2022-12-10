@@ -13,3 +13,5 @@ ja:
         genre: ジャンル
         title: タイトル
         body: 本文
+      report:
+        reason: 通報理由

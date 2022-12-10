@@ -2,9 +2,10 @@
 <div class="container my-3">
   <div class="row mx-2 flex-column">
     <% if notifications.exists? %>
+        <%#= link_to "全削除",notifications_path, method: :delete,class: "btn btn-light" %>
 
       <%= render notifications %>
-      <%= paginate notifications %>
+      <div class = "my-3"><%= paginate notifications %></div>
     <% else %>
       <p>通知はありません</p>
     <% end %>

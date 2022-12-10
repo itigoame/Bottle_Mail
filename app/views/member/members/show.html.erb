@@ -1,4 +1,5 @@
 <div class="container py-2 border-bottom">
+  <span class ="small mb-2"><%= flash[:notice] %></span>
   <div class="d-flex">
 
     <div class="text-center small px-0">
@@ -66,7 +67,11 @@
         <div class=""><%= simple_format(@member.self_introduction) %></div>
     </div>
   </div>
-
+  <% if @member != current_member %>
+    <div class = "text-right">
+      <%= link_to "通報", new_member_report_path(@member), class: "btn btn-sm btn-secondary text-right" %>
+    </div>
+  <% end %>
 </div>
 
 <div class="container mt-3">

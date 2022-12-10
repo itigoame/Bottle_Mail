@@ -1,0 +1,29 @@
+<div class="container mt-3">
+  <div class="row d-flex mt-4 p-2 mx-2 border-bottom">
+    <div class="col-md-2 col-sm-3"><strong>通報日</strong></div>
+    <div class="col-md-9 col-sm-8"><%= @report.created_at.strftime('%Y/%m/%d %H:%M')%></div>
+  </div>
+  <div class="row d-flex mt-4 p-2 mx-2 border-bottom">
+    <div class="col-md-2 col-sm-3"><strong>通報者</strong></div>
+    <div class="col-md-9 col-sm-8"><%= link_to @report.reporter.name, admin_member_path(@report.reporter) %></div>
+  </div>
+  <div class="row d-flex mt-4 p-2 mx-2 border-bottom">
+    <div class="col-md-2 col-sm-3"><strong>対象者</strong></div>
+    <div class="col-md-9 col-sm-8"><%= link_to @report.reported.name, admin_member_path(@report.reported) %></div>
+  </div>
+  <div class="row d-flex mt-4 p-2 mx-2 border-bottom">
+    <div class="col-md-2 col-sm-3"><strong>内容</strong></div>
+    <div class="col-md-9 col-sm-8 text-break"><%= simple_format(@report.reason) %></div>
+  </div>
+  <div class="row d-flex mt-4 p-2 mx-2 border-bottom">
+    <div class="col-md-2 col-sm-3"><strong>対応</strong></div>
+    <div class="col-md-9 col-sm-8">
+      <% if @report.dealt_with %>
+        <%= link_to "未対応に戻す", admin_report_path(@report.id, report: {dealt_with: false}),method: :patch %>
+      <% else %>
+        <%= link_to "対応済にする", admin_report_path(@report.id, report: {dealt_with: true}), method: :patch %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
