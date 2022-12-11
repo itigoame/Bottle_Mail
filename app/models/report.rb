@@ -4,6 +4,7 @@ class Report < ApplicationRecord
 
   validates :reason, presence: true, length: { minimum: 10, maximum: 500 }
 
+  #対応確認
   def status_check
     if dealt_with == false
       "未"
