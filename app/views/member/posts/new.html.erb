@@ -26,7 +26,7 @@
     <div class="row my-3">
       <div class="col-md-6 my-2 md-my-3 text-left text-md-right">カテゴリー選択</div>
       <div class="col-md-6 my-2 md-my-3">
-        <%= f.collection_select :category_id, @categories, :id, :name %>
+        <%= f.collection_select :category_id, @categories, :id, :name ,include_blank: "選択してください"%>
       </div>
     </div>
     <!--カテゴリーに対するジャンルが存在する場合のみ表示-->

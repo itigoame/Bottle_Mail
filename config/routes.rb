@@ -51,7 +51,7 @@ Rails.application.routes.draw do
       resources :genres,      only:   :index
       resources :posts,       only:   :index
     end
-    resources :notifications, only:   [:index]
+    resources :notifications, only:   :index
 
     # delete  ':notifications' => "notifications#destroy_all"
 
