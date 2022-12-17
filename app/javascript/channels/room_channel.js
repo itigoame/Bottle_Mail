@@ -22,14 +22,18 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
   }
 });
 
-window.addEventListener("click", function(event) {
-  // 送信ボタンが押された時
-  if (event.ckick === ".chat_submit") {
-    // speakアクションを発火
-    appRoom.speak(event.target.value);
-    // テキストボックスに入力した文字列を取得。
-    event.target.value = '';
-    //
-    event.preventDefault();
-  }
-})
+// window.addEventListener ('click', function(event) {
+//   if(event.onclick === "#chat_btn"){
+//   appRoom.speak; $(speaker_text).val();
+//     event.target.value = '';
+//     event.preventDefault();
+// }
+// })
+
+// $(document).on ('click', '#chat_btn', function(e) {
+//   // appRoom.speak(e.target.value);
+//   //   e.target.value = '';
+//   //   e.preventDefault();
+//   console.log ("A");
+// })
+

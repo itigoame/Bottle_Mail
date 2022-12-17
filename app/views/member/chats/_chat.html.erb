@@ -33,10 +33,12 @@
           <%= flash[:chat_create_alret] %>
           <%= f.hidden_field :room_id, value: room.id %>
           <%= f.text_area :message, class: "form-control" %>
+          <!--<input type = "text" data-behavior ="room_speaker" id = "speaker_text" class = "form-control">-->
         </div>
         <div class="d-flex col-md-1 align-items-center">
           <%#= f.submit "送信",class: "btn btn-sm btn-secondary" %>
-          <!--<input id="chat_submit" type = "submit" value = "送信" data-behavior="room_speaker" >-->
+          <!--<button class = "btn btn-sm btn-secondary" id = "chat_btn" data-behavior = "room_speaker" >送信</button>-->
+          <!--<input type = "submit" value = "送信" data-behavior="room_speaker" class = "btn btn-sm btn-secondary" >-->
         </div>
       </div>
     <% end %>
