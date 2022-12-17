@@ -4,4 +4,20 @@
     <h4><%= image_tag @partner.member.get_profile_image(50,50) %>　<%= @partner.member.name %></h4>
   <% end %>
 </div>
-<%= render "member/chats/chat",chats: @chats, chat: @chat, room: @room %>
+<div id = "chat_index">
+  <%= render "member/chats/chat",chats: @chats, chat: @chat, room: @room %>
+</div>
+  <div class="container form-design">
+      <div class="row justify-content-center fixed-bottom">
+        <div class="col-md-8 form-group ml-sm-0 ml-xs-0 pr-0">
+    <%= form_with model: @chat,url:room_chats_path(@room.id),method: :post do |f| %>
+          <%= flash[:chat_create_alret] %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.text_area :message, class: "form-control" %>
+          <% f.submit %>
+    <% end %>
+        </div>
+        <div class="d-flex col-md-1 align-items-center">
+        </div>
+      </div>
+  </div>
